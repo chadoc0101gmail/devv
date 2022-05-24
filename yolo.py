@@ -232,8 +232,8 @@ class YOLO(object):
                     index=np.linspace(1, 3, 3, dtype=int))
         # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
         #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
-        #link_Baidu = 'https://baike.baidu.com/item/' + \
-        #    predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
+        link_Baidu = 'https://baike.baidu.com/item/' + \
+            predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
         # 显示故障鸟种并生成超链接Wiki百科
         # 显示故障鸟种并生成超链接百度百科
         
