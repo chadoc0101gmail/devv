@@ -309,7 +309,7 @@ class YOLO(object):
             # 显示识别故障鸟种置信度
             df.iloc[i, 1] = score
             list(enumerate(np.unique(top_label_num)))
-            df.iloc[i,3] = top_label_num[i]
+            df.iloc[i,2] = top_label_num[i]
             df.iloc[i,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
