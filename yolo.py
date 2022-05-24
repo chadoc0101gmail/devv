@@ -299,19 +299,19 @@ class YOLO(object):
         df = pd.DataFrame(data=np.zeros(len(np.unique(top_label)), 6)),
                 columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],
                 index=np.linspace(1, 3, 3, dtype=int))
-        for i, c in list(enumerate(np.unique(top_label))): #将矩阵添加索引（键值对）
-            Predicted_LableClass = self.class_names[int(c)]  #数字->标签
-            # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
-            #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
-            link_Baidu = 'https://baike.baidu.com/item/' + \
-                ChineseName[predicted_class].replace(' ', '_')  # 故障鸟种超链接Wiki百科
-            df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
-            # 显示识别故障鸟种置信度
-            df.iloc[i, 1] = score
-            df.iloc[i,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
-            df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
-            df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
-        st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
+        #for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
+        #   Predicted_LableClass = self.class_names[int(c)]  #数字->标签
+        #    # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
+        #    #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
+        #    link_Baidu = 'https://baike.baidu.com/item/' + \
+        #        ChineseName[predicted_class].replace(' ', '_')  # 故障鸟种超链接Wiki百科
+        #    df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
+        #    # 显示识别故障鸟种置信度
+        #    df.iloc[i, 1] = score
+        #    df.iloc[i,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
+        #    df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
+        #    df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
+        #st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
 
         return image
 
