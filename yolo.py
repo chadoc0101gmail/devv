@@ -235,6 +235,7 @@ class YOLO(object):
             top_label   = np.array(results[0][:, 6], dtype = 'int32')
             top_conf    = results[0][:, 4] * results[0][:, 5]
             top_boxes   = results[0][:, :4]
+            st.subheader(':balloon:预测结果：{}     :balloon:置信度：{:.2f}'.format(top_conf,top_boxes))
         #---------------------------------------------------------#
         #   设置字体与边框厚度
         #---------------------------------------------------------#
