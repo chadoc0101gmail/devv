@@ -297,8 +297,8 @@ class YOLO(object):
     ## 表格 
         df = pd.DataFrame(data=np.zeros((len(np.unique(top_label)), 6)),
             columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
-            index=np.linspace(1, len(np.unique(top_label)), len(np.unique(top_label)), dtype=int))  #列  
-        top_label_class,top_label_num=np.unique(top_label,return_counts=True)
+            index=np.linspace(1, len(np.uniqtop_label_(top_labindex e l)), len(np.unique(top_label)), dtype=int))  #列  
+        top_label_class, top_label_num, top_label_index = np.unique(top_label,return_counts=True, return_index=True)
         for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
             Predicted_LableClass = self.class_names[int(c)]  #数字->标签
             # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
@@ -307,9 +307,9 @@ class YOLO(object):
                 ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接Wiki百科
             df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
             # 显示识别故障鸟种置信度
-            df.iloc[i, 1] = score
+            df.iloc[i, 1] = top_label_index[i]
             list(enumerate(np.unique(top_label_num)))
-            df.iloc[i,2] = top_label_num[i]
+            df.iloc[i,2] = top_conf[top_label_num[i]]
             df.iloc[i,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
