@@ -294,12 +294,11 @@ class YOLO(object):
             del draw
     ## 简单显示预测结果 ##
         st.subheader(':balloon:预测结果：{}     :balloon:置信度：{:.2f}'.format(ChineseName[predicted_class],score))
-    ## 表格 ##len(np.unique(top_label))
-        nnnnn = len(np.unique(top_label))
-        print(len(np.unique(top_label)))
+    ## 表格 
         df = pd.DataFrame(data=np.zeros((len(np.unique(top_label)), 6)),
             columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
             index=np.linspace(1, len(np.unique(top_label)), len(np.unique(top_label)), dtype=int))  #列  
+        top_label_class,top_label_num=np.unique(top_label,return_counts=True)
         for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
             Predicted_LableClass = self.class_names[int(c)]  #数字->标签
             # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
@@ -309,6 +308,8 @@ class YOLO(object):
             df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
             # 显示识别故障鸟种置信度
             df.iloc[i, 1] = score
+            list(enumerate(np.unique(top_label_num)))
+            df.iloc[i,3] = top_label_num[i]
             df.iloc[i,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
