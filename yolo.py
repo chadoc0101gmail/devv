@@ -236,7 +236,7 @@ class YOLO(object):
             top_conf    = results[0][:, 4] * results[0][:, 5]
             top_boxes   = results[0][:, :4]
             #此处存在循环
-            st.subheader(':balloon:预测结果：{}     '.format(top_conf))
+            st.subheader(':balloon:预测结果：{}     '.format(top_label))
         #---------------------------------------------------------#
         #   设置字体与边框厚度
         #---------------------------------------------------------#
