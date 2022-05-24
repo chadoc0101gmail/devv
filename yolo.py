@@ -239,10 +239,10 @@ class YOLO(object):
         
         #df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{ChineseName[predicted_class.title()]}</a>'
         # 显示识别故障鸟种置信度
-        df.iloc[0, 1] = score
+        #df.iloc[0, 1] = score
         
         
-        df.iloc[0, 3] = f'<a  target="_blank">{ProblemTpye[predicted_class.title()]}</a>'
+        #df.iloc[0, 3] = f'<a  target="_blank">{ProblemTpye[predicted_class.title()]}</a>'
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
 
         return image
