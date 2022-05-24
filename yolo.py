@@ -221,15 +221,15 @@ class YOLO(object):
         df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{predicted_class.title()}</a>'
         # 显示识别故障鸟种置信度
         df.iloc[0, 1] = score
-        ProblemTpye = { 'HG' : '鸟粪闪络、鸟体短接、鸟巢短路', 'DFBG' : '鸟粪闪络、鸟巢短路、鸟体短接', 'DB' : '鸟体短接'  , 'BL' : '鸟粪闪络、鸟巢短路', 'DS' : '鸟粪闪络',
-                        'CL' : '鸟粪闪络、鸟巢短路' , 'HS' : '鸟粪闪络', 'HLLN': '鸟巢短路', 'SGLN' : '鸟巢短路', 'BG' : '鸟粪闪络、鸟巢短路',
-                        'HXQ' : '鸟巢短路、鸟啄复合绝缘子', 'XQ' : '鸟巢短路、鸟啄复合绝缘子', 'DZWY' : '鸟粪闪络、鸟巢短路、鸟啄复合绝缘子' , 'DDJ' : '鸟粪闪络', 'ZJBJ' : '鸟粪闪络、鸟体短接、鸟巢短路',
-                        'BTB' : '鸟粪闪络', 'HZHL' : '鸟粪闪络', 'JY' : '鸟粪闪络', 'HY' : '鸟粪闪络、鸟体短接', 'CEX' : '鸟粪闪络、鸟体短接',
-                        'NBL' : '鸟粪闪络、鸟巢短路', 'BPL' : '鸟体短接', 'TJ' : '鸟体短接、鸟粪闪络', 'SY' : '鸟粪闪络', 'HZLQ' : '鸟粪闪络',
-                        'HWBL': '鸟粪闪络', 'BHWQ' : '鸟粪闪络', 'HM' : '鸟粪闪络', 'DTE' : '鸟体短接', 'CMY' : '鸟体短接',
-                        'QBMY' : '鸟体短接', 'LTY' : '鸟体短接', 'PTLC' : '鸟体短接', 'JYTH' : '鸟体短接', 'HSJ' : '鸟体短接',
-                        'PTCN' : '鸟粪闪络', 'FTMJ' : '鸟体短接', 'PTYO' : '鸟体短接', 'GYG' : '鸟粪闪络', 'HTLZMN' : '鸟啄类'}
-        df.iloc[0, 3] = ProblemTpye[predicted_class.title()]
+        ProblemTpye = { 'Hg' : '鸟粪闪络、鸟体短接、鸟巢短路', 'Dfbg' : '鸟粪闪络、鸟巢短路、鸟体短接', 'Db' : '鸟体短接'  , 'Bl' : '鸟粪闪络、鸟巢短路', 'Ds' : '鸟粪闪络',
+                        'Cl' : '鸟粪闪络、鸟巢短路' , 'Hs' : '鸟粪闪络', 'Hlln': '鸟巢短路', 'Sgln' : '鸟巢短路', 'Bg' : '鸟粪闪络、鸟巢短路',
+                        'Hxq' : '鸟巢短路、鸟啄复合绝缘子', 'Xq' : '鸟巢短路、鸟啄复合绝缘子', 'Dzwy' : '鸟粪闪络、鸟巢短路、鸟啄复合绝缘子' , 'Ddj' : '鸟粪闪络', 'Zjbj' : '鸟粪闪络、鸟体短接、鸟巢短路',
+                        'Btb' : '鸟粪闪络', 'Hzhl' : '鸟粪闪络', 'Jy' : '鸟粪闪络', 'Hy' : '鸟粪闪络、鸟体短接', 'Cex' : '鸟粪闪络、鸟体短接',
+                        'Nbl' : '鸟粪闪络、鸟巢短路', 'Bpl' : '鸟体短接', 'Tj' : '鸟体短接、鸟粪闪络', 'Sy' : '鸟粪闪络', 'Hzlq' : '鸟粪闪络',
+                        'Hwbl': '鸟粪闪络', 'Bhwq' : '鸟粪闪络', 'Hm' : '鸟粪闪络', 'Dte' : '鸟体短接', 'Cmy' : '鸟体短接',
+                        'Qbmy' : '鸟体短接', 'Lty' : '鸟体短接', 'Ptlc' : '鸟体短接', 'Jyth' : '鸟体短接', 'Hsj' : '鸟体短接',
+                        'Ptcn' : '鸟粪闪络', 'Ftmj' : '鸟体短接', 'Ptyo' : '鸟体短接', 'Gyg' : '鸟粪闪络', 'Htlzmn' : '鸟啄类'}
+        df.iloc[0,3] = f'<a target="_blank">{ProblemTpye[predicted_class.title()]}</a>'
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
 
         return image
