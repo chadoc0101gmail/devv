@@ -232,11 +232,11 @@ class YOLO(object):
             if results[0] is None: 
                 return image
 
-            top_label   = np.array(results[0][:, 6], dtype = 'int32')
-            top_conf    = results[0][:, 4] * results[0][:, 5]
+            top_label   = np.array(results[0][:, 6], dtype = 'int32') #标签
+            top_conf    = results[0][:, 4] * results[0][:, 5]   #置信度
             top_boxes   = results[0][:, :4]
             #此处存在循环 num=len(np.unique(data))
-            st.subheader(':balloon:种类：{}     :balloon:个数：{}'.format(np.unique(top_label), len(np.unique(top_label))))
+            st.subheader(':balloon:种类：{}     :balloon:个数：{}'.format(np.unique(top_conf), len(np.unique(top_label))))
         #---------------------------------------------------------#
         #   设置字体与边框厚度
         #---------------------------------------------------------#
