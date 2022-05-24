@@ -230,7 +230,7 @@ class YOLO(object):
                         'QBMY' : '鸟体短接', 'LTY' : '鸟体短接', 'PTLC' : '鸟体短接', 'JYTH' : '鸟体短接', 'HSJ' : '鸟体短接',
                         'PTCN' : '鸟粪闪络', 'FTMJ' : '鸟体短接', 'PTYO' : '鸟体短接', 'GYG' : '鸟粪闪络', 'HTLZMN' : '鸟啄类'}
         
-        df.iloc[0, 3] = f'<a  target="_blank">{ProblemTpye[predicted_class.title()]}</a>'
+        #df.iloc[0, 3] = f'<a  target="_blank">{ProblemTpye[predicted_class.title()]}</a>'
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
 
         return image
