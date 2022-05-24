@@ -86,7 +86,7 @@ if __name__ == "__main__":
                 except:
                     print('Open Error! Try again!')
                 else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
-                    r_image = yolo.detect_image(image, crop = crop)
+                    r_image = yolo.detect_image(image, crop = true)
                     st.image(r_image)
                     # r_image.show()
             else:
