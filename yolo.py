@@ -233,7 +233,7 @@ class YOLO(object):
         # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
         #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
         link_Baidu = 'https://baike.baidu.com/item/' + \
-            ChineseName[predicted_class.title()].replace(' ', '_')  # 故障鸟种超链接Wiki百科
+            predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
         # 显示故障鸟种并生成超链接Wiki百科
         # 显示故障鸟种并生成超链接百度百科
         
