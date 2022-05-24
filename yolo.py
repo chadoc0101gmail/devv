@@ -209,14 +209,14 @@ class YOLO(object):
     ## 简单显示预测结果 ##
         st.subheader(':balloon:预测结果：{}----:balloon:置信度：{:.2f}'.format(predicted_class,score))
     ## 表格 ##
-        ChineseName = { 'Hg' : '黑鹳(Ciconia nigra)', 'Dfbg' : '东方白鹳(Ciconia boyciana)', 'Db' : '大鸨(Otis tarda)'  , 'Bl' : '白鹭(Egretta garzetta)', 'Ds' : '戴胜(Upupa epops)',
-                'Cl' : '池鹭(Ardeola bacchus)' , 'Hs' : '红隼(Falco tinnunculus)', 'Hlln': '黑领椋鸟(Sturnus nigricollis)', 'Sgln' : '丝光椋鸟(Sturnus sericeus)', 'Bg' : '八哥(Acridotheres cristatellus)',
-                'Hxq' : '灰喜鹊(Cyanopica cyana)', 'Xq' : '喜鹊(Pica pica)', 'Dzwy' : '大嘴乌鸦(Corvus macrorhynchos)' , 'Ddj' : '大杜鹃(Cuculus canorus)', 'Zjbj' : '珠颈斑鸠(Streptopelia chinensis)',
-                'Btb' : '白头鹎(Pycnonotus sinensis)', 'Hzhl' : '黑枕黄鹂(Oriolus chinensis)', 'Jy' : '家燕', 'Hy' : '鸿雁(Anser cygnoides)', 'Cex' : '长耳鸮(Asio otus)',
-                'Nbl' : '牛背鹭(Bubulcus ibis)', 'Bpl' : '白琵鹭(Platalea leucorodia)', 'Tj' : '秃鹫(Aegypius monachus)', 'Sy' : '松鸦(Garrulus glandarius)', 'Hzlq' : '红嘴蓝鹊(Urocissa erythrorhyncha)',
-                'Hwbl': '虎纹伯劳(Lanius tigrinus)', 'Bhwq' : '北红尾鸲(Phoenicurus auroreus)', 'Hm' : '画眉(Garrulax canorus)', 'Dte' : '大天鹅(Cygnus cygnus)', 'Cmy' : '赤麻鸭(Tadorna ferruginea)',
-                'Qbmy' : '翘鼻麻鸭(Tadorna tadorna)', 'Lty' : '绿头鸭(Anas platyrhynchos)', 'Ptlc' : '普通鸬鹚(Phalacrocorax carbo)', 'Jyth' : '卷羽鹈鹕(Pelecanus crispus)', 'Hsj' : '黑水鸡(Gallinula chloropus)',
-                'Ptcn' : '普通翠鸟(Alcedo atthis)', 'Ftmj' : '凤头麦鸡(Vanellus vanellus)', 'Ptyo' : '普通燕鸥(Sterna hirundo)', 'Gyg' : '冠鱼狗(Megaceryle lugubris)', 'Htlzmn' : '灰头绿啄木鸟(Picus canus)'}
+        ChineseName = { 'Hg' : '黑鹳', 'Dfbg' : '东方白鹳', 'Db' : '大鸨'  , 'Bl' : '白鹭', 'Ds' : '戴胜',
+                'Cl' : '池鹭' , 'Hs' : '红隼', 'Hlln': '黑领椋鸟', 'Sgln' : '丝光椋鸟', 'Bg' : '八哥',
+                'Hxq' : '灰喜鹊', 'Xq' : '喜鹊', 'Dzwy' : '大嘴乌鸦' , 'Ddj' : '大杜鹃', 'Zjbj' : '珠颈斑鸠',
+                'Btb' : '白头鹎', 'Hzhl' : '黑枕黄鹂', 'Jy' : '家燕', 'Hy' : '鸿雁', 'Cex' : '长耳鸮',
+                'Nbl' : '牛背鹭', 'Bpl' : '白琵鹭', 'Tj' : '秃鹫', 'Sy' : '松鸦', 'Hzlq' : '红嘴蓝鹊',
+                'Hwbl': '虎纹伯劳', 'Bhwq' : '北红尾鸲', 'Hm' : '画眉', 'Dte' : '大天鹅', 'Cmy' : '赤麻鸭',
+                'Qbmy' : '翘鼻麻鸭', 'Lty' : '绿头鸭', 'Ptlc' : '普通鸬鹚', 'Jyth' : '卷羽鹈鹕', 'Hsj' : '黑水鸡',
+                'Ptcn' : '普通翠鸟', 'Ftmj' : '凤头麦鸡', 'Ptyo' : '普通燕鸥', 'Gyg' : '冠鱼狗', 'Htlzmn' : '灰头绿啄木鸟'}
     
         ProblemTpye = { 'Hg' : '鸟粪闪络、鸟体短接、鸟巢短路', 'Dfbg' : '鸟粪闪络、鸟巢短路、鸟体短接', 'Db' : '鸟体短接'  , 'Bl' : '鸟粪闪络、鸟巢短路', 'Ds' : '鸟粪闪络',
                         'Cl' : '鸟粪闪络、鸟巢短路' , 'Hs' : '鸟粪闪络', 'Hlln': '鸟巢短路', 'Sgln' : '鸟巢短路', 'Bg' : '鸟粪闪络、鸟巢短路',
