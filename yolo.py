@@ -307,9 +307,9 @@ class YOLO(object):
                 ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接Wiki百科
             df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
             # 显示识别故障鸟种置信度
-            df.iloc[i, 1] = top_label_index[i]
+            df.iloc[i, 1] = top_conf[top_label_index[i]]
             list(enumerate(np.unique(top_label_num)))
-            df.iloc[i,2] = top_conf[top_label_num[i]]
+            df.iloc[i,2] = top_label_num[i]
             df.iloc[i,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
