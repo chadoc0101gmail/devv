@@ -209,6 +209,15 @@ class YOLO(object):
     ## 简单显示预测结果 ##
         st.subheader(':balloon:预测结果：{}----:balloon:置信度：{:.2f}'.format(predicted_class,score))
     ## 表格 ##
+        ChineseName = { 'Hg' : '黑鹳(Ciconia nigra)', 'Dfbg' : '东方白鹳(Ciconia boyciana)', 'Db' : '大鸨(Otis tarda)'  , 'Bl' : '白鹭(Egretta garzetta)', 'Ds' : '戴胜(Upupa epops)',
+                'Cl' : '池鹭(Ardeola bacchus)' , 'Hs' : '红隼(Falco tinnunculus)', 'Hlln': '黑领椋鸟(Sturnus nigricollis)', 'Sgln' : '丝光椋鸟(Sturnus sericeus)', 'Bg' : '八哥(Acridotheres cristatellus)',
+                'Hxq' : '灰喜鹊(Cyanopica cyana)', 'Xq' : '喜鹊(Pica pica)', 'Dzwy' : '大嘴乌鸦(Corvus macrorhynchos)' , 'Ddj' : '大杜鹃(Cuculus canorus)', 'Zjbj' : '珠颈斑鸠(Streptopelia chinensis)',
+                'Btb' : '白头鹎(Pycnonotus sinensis)', 'Hzhl' : '黑枕黄鹂(Oriolus chinensis)', 'Jy' : '家燕(Hirundo rustica)', 'Hy' : '鸿雁(Anser cygnoides)', 'Cex' : '长耳鸮(Asio otus)',
+                'Nbl' : '牛背鹭(Bubulcus ibis)', 'Bpl' : '白琵鹭(Platalea leucorodia)', 'Tj' : '秃鹫(Aegypius monachus)', 'Sy' : '松鸦(Garrulus glandarius)', 'Hzlq' : '红嘴蓝鹊(Urocissa erythrorhyncha)',
+                'Hwbl': '虎纹伯劳(Lanius tigrinus)', 'Bhwq' : '北红尾鸲(Phoenicurus auroreus)', 'Hm' : '画眉(Garrulax canorus)', 'Dte' : '大天鹅(Cygnus cygnus)', 'Cmy' : '赤麻鸭(Tadorna ferruginea)',
+                'Qbmy' : '翘鼻麻鸭(Tadorna tadorna)', 'Lty' : '绿头鸭(Anas platyrhynchos)', 'Ptlc' : '普通鸬鹚(Phalacrocorax carbo)', 'Jyth' : '卷羽鹈鹕(Pelecanus crispus)', 'Hsj' : '黑水鸡(Gallinula chloropus)',
+                'Ptcn' : '普通翠鸟(Alcedo atthis)', 'Ftmj' : '凤头麦鸡(Vanellus vanellus)', 'Ptyo' : '普通燕鸥(Sterna hirundo)', 'Gyg' : '冠鱼狗(Megaceryle lugubris)', 'Htlzmn' : '灰头绿啄木鸟(Picus canus)'}
+    
         ProblemTpye = { 'Hg' : '鸟粪闪络、鸟体短接、鸟巢短路', 'Dfbg' : '鸟粪闪络、鸟巢短路、鸟体短接', 'Db' : '鸟体短接'  , 'Bl' : '鸟粪闪络、鸟巢短路', 'Ds' : '鸟粪闪络',
                         'Cl' : '鸟粪闪络、鸟巢短路' , 'Hs' : '鸟粪闪络', 'Hlln': '鸟巢短路', 'Sgln' : '鸟巢短路', 'Bg' : '鸟粪闪络、鸟巢短路',
                         'Hxq' : '鸟巢短路、鸟啄复合绝缘子', 'Xq' : '鸟巢短路、鸟啄复合绝缘子', 'Dzwy' : '鸟粪闪络、鸟巢短路、鸟啄复合绝缘子' , 'Ddj' : '鸟粪闪络', 'Zjbj' : '鸟粪闪络、鸟体短接、鸟巢短路',
@@ -217,13 +226,15 @@ class YOLO(object):
                         'Hwbl': '鸟粪闪络', 'Bhwq' : '鸟粪闪络', 'Hm' : '鸟粪闪络', 'Dte' : '鸟体短接', 'Cmy' : '鸟体短接',
                         'Qbmy' : '鸟体短接', 'Lty' : '鸟体短接', 'Ptlc' : '鸟体短接', 'Jyth' : '鸟体短接', 'Hsj' : '鸟体短接',
                         'Ptcn' : '鸟粪闪络', 'Ftmj' : '鸟体短接', 'Ptyo' : '鸟体短接', 'Gyg' : '鸟粪闪络', 'Htlzmn' : '鸟啄类'}
+      
+      
         df = pd.DataFrame(data=np.zeros((3, 6)),
                     columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],
                     index=np.linspace(1, 3, 3, dtype=int))
         # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
         #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
         link_Baidu = 'https://baike.baidu.com/item/' + \
-            predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
+            ChineseName[predicted_class.title()].replace(' ', '_')  # 故障鸟种超链接Wiki百科
         # 显示故障鸟种并生成超链接Wiki百科
         # 显示故障鸟种并生成超链接百度百科
         df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{predicted_class.title()}</a>'
