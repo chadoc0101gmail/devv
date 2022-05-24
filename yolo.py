@@ -296,9 +296,9 @@ class YOLO(object):
         st.subheader(':balloon:预测结果：{}     :balloon:置信度：{:.2f}'.format(ChineseName[predicted_class],score))
     ## 表格 ##
         
-        df = pd.DataFrame(data=np.zeros(len(np.unique(top_label)), 6)),
-                columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],
-                index=np.linspace(1, 3, 3, dtype=int))
+        #df = pd.DataFrame(data=np.zeros(len(np.unique(top_label)), 6)),
+        #        columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],
+        #        index=np.linspace(1, 3, 3, dtype=int))
         #for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
         #   Predicted_LableClass = self.class_names[int(c)]  #数字->标签
         #    # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
