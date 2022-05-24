@@ -296,6 +296,7 @@ class YOLO(object):
         st.subheader(':balloon:预测结果：{}     :balloon:置信度：{:.2f}'.format(ChineseName[predicted_class],score))
     ## 表格 ##len(np.unique(top_label))
         nnnnn = len(np.unique(top_label))
+        print(len(np.unique(top_label)))
         df = pd.DataFrame(data=np.zeros((nnnnn, 6)),
             columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],
             index=np.linspace(1, 3, 3, dtype=int))
