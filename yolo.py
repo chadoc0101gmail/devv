@@ -237,7 +237,7 @@ class YOLO(object):
             ChineseName[predicted_class.title()].replace(' ', '_')  # 故障鸟种超链接Wiki百科
         # 显示故障鸟种并生成超链接Wiki百科
         # 显示故障鸟种并生成超链接百度百科
-        df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{predicted_class.lower()}</a>'
+        df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{predicted_class}</a>'
         # 显示识别故障鸟种置信度
         df.iloc[0, 1] = score
         
