@@ -130,85 +130,6 @@ class YOLO(object):
         #   添加上batch_size维度
         #---------------------------------------------------------#
         image_data  = np.expand_dims(np.transpose(preprocess_input(np.array(image_data, dtype='float32')), (2, 0, 1)), 0)
-
-        with torch.no_grad():
-            images = torch.from_numpy(image_data)
-            if self.cuda:
-                images = images.cuda()
-            #---------------------------------------------------------#
-            #   将图像输入网络当中进行预测！
-            #---------------------------------------------------------#
-            outputs = self.net(images)
-            outputs = self.bbox_util.decode_box(outputs)
-            #---------------------------------------------------------#
-            #   将预测框进行堆叠，然后进行非极大抑制
-            #---------------------------------------------------------#
-            results = self.bbox_util.non_max_suppression(torch.cat(outputs, 1), self.num_classes, self.input_shape, 
-                        image_shape, self.letterbox_image, conf_thres = self.confidence, nms_thres = self.nms_iou)
-                                                    
-            if results[0] is None: 
-                return image
-
-            top_label   = np.array(results[0][:, 6], dtype = 'int32')
-            top_conf    = results[0][:, 4] * results[0][:, 5]
-            top_boxes   = results[0][:, :4]
-        #---------------------------------------------------------#
-        #   设置字体与边框厚度
-        #---------------------------------------------------------#
-        font        = ImageFont.truetype(font='model_data/simhei.ttf', size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
-        thickness   = int(max((image.size[0] + image.size[1]) // np.mean(self.input_shape), 1))
-        
-        #---------------------------------------------------------#
-        #   是否进行目标的裁剪
-        #---------------------------------------------------------#
-        if crop:
-            for i, c in list(enumerate(top_boxes)):
-                top, left, bottom, right = top_boxes[i]
-                top     = max(0, np.floor(top).astype('int32'))
-                left    = max(0, np.floor(left).astype('int32'))
-                bottom  = min(image.size[1], np.floor(bottom).astype('int32'))
-                right   = min(image.size[0], np.floor(right).astype('int32'))
-                
-                dir_save_path = "img_crop"
-                if not os.path.exists(dir_save_path):
-                    os.makedirs(dir_save_path)
-                crop_image = image.crop([left, top, right, bottom])
-                crop_image.save(os.path.join(dir_save_path, "crop_" + str(i) + ".png"), quality=95, subsampling=0)
-                print("save crop_" + str(i) + ".png to " + dir_save_path)
-        #---------------------------------------------------------#
-        #   图像绘制
-        #---------------------------------------------------------#
-        for i, c in list(enumerate(top_label)):
-            predicted_class = self.class_names[int(c)]
-            box             = top_boxes[i]
-            score           = top_conf[i]
-
-            top, left, bottom, right = box
-
-            top     = max(0, np.floor(top).astype('int32'))
-            left    = max(0, np.floor(left).astype('int32'))
-            bottom  = min(image.size[1], np.floor(bottom).astype('int32'))
-            right   = min(image.size[0], np.floor(right).astype('int32'))
-
-            label = '{} {:.2f}'.format(predicted_class, score)
-            draw = ImageDraw.Draw(image)
-            label_size = draw.textsize(label, font)
-            label = label.encode('utf-8')
-            print(label, top, left, bottom, right)
-            
-            if top - label_size[1] >= 0:
-                text_origin = np.array([left, top - label_size[1]])
-            else:
-                text_origin = np.array([left, top + 1])
-
-            for i in range(thickness):
-                draw.rectangle([left + i, top + i, right - i, bottom - i], outline=self.colors[c])
-            draw.rectangle([tuple(text_origin), tuple(text_origin + label_size)], fill=self.colors[c])
-            draw.text(text_origin, str(label,'UTF-8'), fill=(0, 0, 0), font=font)
-            del draw
-    ## 简单显示预测结果 ##
-        st.subheader(':balloon:预测结果：{}----:balloon:置信度：{:.2f}'.format(predicted_class,score))
-    ## 表格 ##
         ChineseName = { 'HG' : '黑鹳', 'DFBG' : '东方白鹳', 'DB' : '大鸨'  , 'BL' : '白鹭', 'DS' : '戴胜',
                 'CL' : '池鹭' , 'HS' : '红隼', 'HLLN': '黑领椋鸟', 'SGLN' : '丝光椋鸟', 'BG' : '八哥',
                 'HXQ' : '灰喜鹊', 'XQ' : '喜鹊', 'DZWY' : '大嘴乌鸦' , 'DDJ' : '大杜鹃', 'ZJBJ' : '珠颈斑鸠',
@@ -292,8 +213,85 @@ class YOLO(object):
                         'HWBL': '鸟粪闪络', 'BHWQ' : '鸟粪闪络', 'HM' : '鸟粪闪络', 'DTE' : '鸟体短接', 'CMY' : '鸟体短接',
                         'QBMY' : '鸟体短接', 'LTY' : '鸟体短接', 'PTLC' : '鸟体短接', 'JYTH' : '鸟体短接', 'HSJ' : '鸟体短接',
                         'PTCN' : '鸟粪闪络', 'FTMJ' : '鸟体短接', 'PTYO' : '鸟体短接', 'GYG' : '鸟粪闪络', 'HTLZMN' : '鸟啄类'}
-      
-      
+        
+        with torch.no_grad():
+            images = torch.from_numpy(image_data)
+            if self.cuda:
+                images = images.cuda()
+            #---------------------------------------------------------#
+            #   将图像输入网络当中进行预测！
+            #---------------------------------------------------------#
+            outputs = self.net(images)
+            outputs = self.bbox_util.decode_box(outputs)
+            #---------------------------------------------------------#
+            #   将预测框进行堆叠，然后进行非极大抑制
+            #---------------------------------------------------------#
+            results = self.bbox_util.non_max_suppression(torch.cat(outputs, 1), self.num_classes, self.input_shape, 
+                        image_shape, self.letterbox_image, conf_thres = self.confidence, nms_thres = self.nms_iou)
+                                                    
+            if results[0] is None: 
+                return image
+
+            top_label   = np.array(results[0][:, 6], dtype = 'int32')
+            top_conf    = results[0][:, 4] * results[0][:, 5]
+            top_boxes   = results[0][:, :4]
+        #---------------------------------------------------------#
+        #   设置字体与边框厚度
+        #---------------------------------------------------------#
+        font        = ImageFont.truetype(font='model_data/simhei.ttf', size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        thickness   = int(max((image.size[0] + image.size[1]) // np.mean(self.input_shape), 1))
+        
+        #---------------------------------------------------------#
+        #   是否进行目标的裁剪
+        #---------------------------------------------------------#
+        if crop:
+            for i, c in list(enumerate(top_boxes)):
+                top, left, bottom, right = top_boxes[i]
+                top     = max(0, np.floor(top).astype('int32'))
+                left    = max(0, np.floor(left).astype('int32'))
+                bottom  = min(image.size[1], np.floor(bottom).astype('int32'))
+                right   = min(image.size[0], np.floor(right).astype('int32'))
+                
+                dir_save_path = "img_crop"
+                if not os.path.exists(dir_save_path):
+                    os.makedirs(dir_save_path)
+                crop_image = image.crop([left, top, right, bottom])
+                crop_image.save(os.path.join(dir_save_path, "crop_" + str(i) + ".png"), quality=95, subsampling=0)
+                print("save crop_" + str(i) + ".png to " + dir_save_path)
+        #---------------------------------------------------------#
+        #   图像绘制
+        #---------------------------------------------------------#
+        for i, c in list(enumerate(top_label)):
+            predicted_class = self.class_names[int(c)]
+            box             = top_boxes[i]
+            score           = top_conf[i]
+
+            top, left, bottom, right = box
+
+            top     = max(0, np.floor(top).astype('int32'))
+            left    = max(0, np.floor(left).astype('int32'))
+            bottom  = min(image.size[1], np.floor(bottom).astype('int32'))
+            right   = min(image.size[0], np.floor(right).astype('int32'))
+
+            label = '{} {:.2f}'.format(predicted_class, score)
+            draw = ImageDraw.Draw(image)
+            label_size = draw.textsize(label, font)
+            label = label.encode('utf-8')
+            print(label, top, left, bottom, right)
+            
+            if top - label_size[1] >= 0:
+                text_origin = np.array([left, top - label_size[1]])
+            else:
+                text_origin = np.array([left, top + 1])
+
+            for i in range(thickness):
+                draw.rectangle([left + i, top + i, right - i, bottom - i], outline=self.colors[c])
+            draw.rectangle([tuple(text_origin), tuple(text_origin + label_size)], fill=self.colors[c])
+            draw.text(text_origin, str(label,'UTF-8'), fill=(0, 0, 0), font=font)
+            del draw
+    ## 简单显示预测结果 ##
+        st.subheader(':balloon:预测结果：{}     :balloon:置信度：{:.2f}'.format(ChineseName[predicted_class],score))
+    ## 表格 ##
         df = pd.DataFrame(data=np.zeros((3, 6)),
                     columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],
                     index=np.linspace(1, 3, 3, dtype=int))
