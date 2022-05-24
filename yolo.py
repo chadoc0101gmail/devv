@@ -221,12 +221,12 @@ class YOLO(object):
         ChineseName = { 'Hg' : '黑鹳(Ciconia nigra)', 'Dfbg' : '东方白鹳(Ciconia boyciana)', 'Db' : '大鸨(Otis tarda)'  , 'Bl' : '白鹭(Egretta garzetta)', 'Ds' : '戴胜(Upupa epops)',
                 'Cl' : '池鹭(Ardeola bacchus)' , 'Hs' : '红隼(Falco tinnunculus)', 'Hlln': '黑领椋鸟(Sturnus nigricollis)', 'Sgln' : '丝光椋鸟(Sturnus sericeus)', 'Bg' : '八哥(Acridotheres cristatellus)',
                 'Hxq' : '灰喜鹊(Cyanopica cyana)', 'Xq' : '喜鹊(Pica pica)', 'Dzwy' : '大嘴乌鸦(Corvus macrorhynchos)' , 'Ddj' : '大杜鹃(Cuculus canorus)', 'Zjbj' : '珠颈斑鸠(Streptopelia chinensis)',
-                'Btb' : '白头鹎(Pycnonotus sinensis)', 'Hzhl' : '黑枕黄鹂(Oriolus chinensis)', 'Jy' : '家燕', 'Hy' : '鸿雁(Anser cygnoides)', 'Cex' : '长耳鸮(Asio otus)',
+                'Btb' : '白头鹎(Pycnonotus sinensis)', 'Hzhl' : '黑枕黄鹂(Oriolus chinensis)', 'JY' : '家燕', 'Hy' : '鸿雁(Anser cygnoides)', 'Cex' : '长耳鸮(Asio otus)',
                 'Nbl' : '牛背鹭(Bubulcus ibis)', 'Bpl' : '白琵鹭(Platalea leucorodia)', 'Tj' : '秃鹫(Aegypius monachus)', 'Sy' : '松鸦(Garrulus glandarius)', 'Hzlq' : '红嘴蓝鹊(Urocissa erythrorhyncha)',
                 'Hwbl': '虎纹伯劳(Lanius tigrinus)', 'Bhwq' : '北红尾鸲(Phoenicurus auroreus)', 'Hm' : '画眉(Garrulax canorus)', 'Dte' : '大天鹅(Cygnus cygnus)', 'Cmy' : '赤麻鸭(Tadorna ferruginea)',
                 'Qbmy' : '翘鼻麻鸭(Tadorna tadorna)', 'Lty' : '绿头鸭(Anas platyrhynchos)', 'Ptlc' : '普通鸬鹚(Phalacrocorax carbo)', 'Jyth' : '卷羽鹈鹕(Pelecanus crispus)', 'Hsj' : '黑水鸡(Gallinula chloropus)',
                 'Ptcn' : '普通翠鸟(Alcedo atthis)', 'Ftmj' : '凤头麦鸡(Vanellus vanellus)', 'Ptyo' : '普通燕鸥(Sterna hirundo)', 'Gyg' : '冠鱼狗(Megaceryle lugubris)', 'Htlzmn' : '灰头绿啄木鸟(Picus canus)'}
-        df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{ChineseName[predicted_class.title()]}</a>'
+        df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{ChineseName[predicted_class.lower()]}</a>'
         # 显示识别故障鸟种置信度
         df.iloc[0, 1] = score
         ProblemTpye = { 'Hg' : '鸟粪闪络、鸟体短接、鸟巢短路', 'Dfbg' : '鸟粪闪络、鸟巢短路、鸟体短接', 'Db' : '鸟体短接'  , 'Bl' : '鸟粪闪络、鸟巢短路', 'Ds' : '鸟粪闪络',
