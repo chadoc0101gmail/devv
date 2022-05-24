@@ -298,7 +298,7 @@ class YOLO(object):
         df = pd.DataFrame(data=np.zeros((len(np.unique(top_label)), 6)),
             columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
             index=np.linspace(1, len(np.unique(top_label)), len(np.unique(top_label)), dtype=int))  #列  
-        top_label_class, top_label_num, top_label_index = np.unique(top_label,return_counts=True, return_index=True)
+        top_label_class, top_label_num= np.unique(top_label,return_counts=True)
         for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
             Predicted_LableClass = self.class_names[int(c)]  #数字->标签
             # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
