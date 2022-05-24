@@ -236,8 +236,7 @@ class YOLO(object):
             top_conf    = results[0][:, 4] * results[0][:, 5]
             top_boxes   = results[0][:, :4]
             #此处存在循环 num=len(np.unique(data))
-            top_label_Number = np.unique(top_label)
-            st.subheader(':balloon:预测结果：{}     '.format(top_label_Number))
+            st.subheader(':balloon:种类：{}     :balloon:个数：{}'.format(np.unique(top_label), len(np.unique(top_label))))
         #---------------------------------------------------------#
         #   设置字体与边框厚度
         #---------------------------------------------------------#
