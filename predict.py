@@ -4,11 +4,14 @@
 #-----------------------------------------------------------------------#
 import time
 import streamlit as st
+from streamlit_option_menu import option_menu
+import streamlit.components.v1 as html
 # import cv2
 import numpy as np
 from PIL import Image
 
 from yolo import YOLO
+
 
 if __name__ == "__main__":
     yolo = YOLO()
@@ -24,7 +27,7 @@ if __name__ == "__main__":
     #   crop指定了是否在单张图片预测后对目标进行截取
     #   crop仅在mode='predict'时有效
     #-------------------------------------------------------------------------#
-    crop            = True
+    crop            = False
     #----------------------------------------------------------------------------------------------------------#
     #   video_path用于指定视频的路径，当video_path=0时表示检测摄像头
     #   想要检测视频，则设置如video_path = "xxx.mp4"即可，代表读取出根目录下的xxx.mp4文件。
@@ -59,45 +62,134 @@ if __name__ == "__main__":
         # 4、如果想要在预测图上写额外的字，比如检测到的特定目标的数量，可以进入yolo.detect_image函数，在绘图部分对predicted_class进行判断，
         # 比如判断if predicted_class == 'car': 即可判断当前目标是否为车，然后记录数量即可。利用draw.text即可写字。
         # '''
-        
+
+        with st.sidebar:
+            choose = option_menu("甄羽Streamlit", ["拍照识鸟", "图片/音乐/视频", "数据可视化", "地图分布", "其他应用"],
+                                icons=['camera-fill', 'file-earmark-music', 'bar-chart', 'brightness-high'], # 对应的小图标，不用改
+                                menu_icon="broadcast", default_index=0)
+        if choose == "拍照识鸟":
+            selecte0 = option_menu(None, ["智能识别", "涉鸟隐患"],
+                icons=['house', 'cloud-upload'],
+                menu_icon="cast", default_index=0, orientation="horizontal")
+            if selecte0 == "智能识别":
+                ####### 
+                st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:【Version in 2022.5.25】') #网页上的文本
+                st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:balloon:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。(LXX_Jo)') #加载图片
+                img = st.file_uploader('图片加载处') #加载图片
+                if img:
+                    try:
+                        image = Image.open(img)
+                    except:
+                        print('Open Error! Try again!')
+                    else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
+                        r_image = yolo.detect_image(image, crop = crop)
+                        st.balloons()
+                        st.image(r_image)
+                        # r_image.show()
+                else:
+                    st.title(":pig:你还未选择图片:pig2:")
+                    st.caption("buluuuuuuuuuuuu")
+                ######  
+            elif selecte0 == "涉鸟隐患":
+                st.title("涉鸟隐患")
+       
+
+        elif choose == "图片/音乐/视频":
+            selecte1 = option_menu(None, ["图片", "音乐", "视频"],
+                icons=['house', 'cloud-upload', "list-task"],
+                menu_icon="cast", default_index=0, orientation="horizontal")
+            if selecte1 == "图片":
+                st.title("随便放张图")
+                st.image("./photo/1.jpg")
+            elif selecte1 == "音乐":
+                # st.audio("./音乐/music.mp3")
+                st.title("音乐")
+            elif selecte1 == "视频":
+                # st.video("./视频/地震.mp4")
+                st.title("视频")
+
+        elif choose == "数据可视化":
+            selecte2 = option_menu(None, ["Echarts", "Plotly", "Streamlit-apex-charts"],
+                                icons=['house', 'cloud-upload', "list-task"],
+                                menu_icon="cast", default_index=0, orientation="horizontal")
+            if selecte2 == "Echarts":
+                html.iframe("https://mp.weixin.qq.com/s/5VDGsnpgx8iF90aF7p1yMg")
+
+            elif selecte2 == "Plotly":
+                html.iframe("https://mp.weixin.qq.com/s/ckcDXhoRmxlxswOviQUbFg")
+
+            elif selecte2 == "Streamlit-apex-charts":
+                st.components.v1.iframe("https://mp.weixin.qq.com/s/Sm3UifwoxVKTsMD-rsyovA")
+
+
+        elif choose == "地理":
+            selecte4 = option_menu(None, ["地震数据", "KML", "Mapinfo TAB"],
+                                icons=['house', 'cloud-upload', 'cloud-upload'],
+                                menu_icon="cast", default_index=0, orientation="horizontal")
+
+            if selecte4 == "地震数据":
+                html.iframe("https://mp.weixin.qq.com/s/HwYQXotuyZAtecOY6SBYKw")
+
+            elif selecte4 == "KML":
+                html.iframe("https://mp.weixin.qq.com/s/-z3dLVE-K0ejB6Sye0EOhg")
+
+            elif selecte4 == "Mapinfo TAB":
+                html.iframe("https://mp.weixin.qq.com/s/kP731l40Rf61CTWfyqbQmg")
+
+
+        elif choose == "其他应用":
+            selecte5 = option_menu(None, ["Javascript", "展示PPT", "嵌入PDF"],
+                                icons=['house', 'cloud-upload', "list-task"],
+                                menu_icon="cast", default_index=0, orientation="horizontal")
+
+            if selecte5 == "Javascript":
+                html.iframe("https://mp.weixin.qq.com/s/Sr4_IAK3pGWRLgjO51i8Mw")
+
+            elif selecte5 == "展示PPT":
+                html.iframe("https://mp.weixin.qq.com/s/i0VcKUHBCEHjoOYvoiGolQ")
+
+
+            elif selecte5 == "嵌入PDF":
+                html.iframe("https://mp.weixin.qq.com/s/W8DX74LZYdosDUXUIpoa1g")
+        ##############################################
         # 侧边栏
-        dtype_file_structure_mapping = { #左边菜单栏Data Portion Type的4个选项
-            '栏目一：拍照识鸟': 'Identify Bird',
-            '栏目二：xxxx': 'Article Recommendation',
-            '栏目三：xxxx': 'Recognition Exercise',
-        } 
-        data_split_names = list(dtype_file_structure_mapping.keys())#暂时不用    
-        dataset_type = st.sidebar.selectbox("导航1", data_split_names)
-        image_files_subset = dtype_file_structure_mapping[dataset_type] 
-        if image_files_subset == 'Identify Bird':
-            st.title('栏目一\n你好 :sunglasses:【Version in 2022.5.23】') #网页上的文本
-            instructions = """
-                为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:balloon:甄羽可为您识别涉鸟故障
-                危害鸟种，以便为运维人员提供正确识鸟的工具。(LXX_Jo)\n
-                """
-            st.write(instructions)
-            st.subheader(':information_desk_person:拍照识鸟：')
+        # dtype_file_structure_mapping = { #左边菜单栏Data Portion Type的4个选项
+        #     '栏目一：拍照识鸟': 'Identify Bird',
+        #     '栏目二：xxxx': 'Article Recommendation',
+        #     '栏目三：xxxx': 'Recognition Exercise',
+        # } 
+        # data_split_names = list(dtype_file_structure_mapping.keys())#暂时不用    
+        # dataset_type = st.sidebar.selectbox("导航1", data_split_names)
+        # image_files_subset = dtype_file_structure_mapping[dataset_type] 
+        # if image_files_subset == 'Identify Bird':
+        #     st.title('栏目一\n你好 :sunglasses:【Version in 2022.5.23】') #网页上的文本
+        #     instructions = """
+        #         为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:balloon:甄羽可为您识别涉鸟故障
+        #         危害鸟种，以便为运维人员提供正确识鸟的工具。(LXX_Jo)\n
+        #         """
+        #     st.write(instructions)
+        #     st.subheader(':information_desk_person:拍照识鸟：')
 
-            # img = input('Input image filename:')
-            img = st.file_uploader('图片加载处') #加载图片
-            if img:
-                try:
-                    image = Image.open(img)
-                except:
-                    print('Open Error! Try again!')
-                else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
-                    r_image = yolo.detect_image(image, crop = crop)
-                    st.image(r_image)
-                    # r_image.show()
-            else:
-                st.title(":balloon:You have not selected a picture :")
-                st.caption("buluuuuuuuuuuuu")
+        #     # img = input('Input image filename:')
+        #     img = st.file_uploader('图片加载处') #加载图片
+        #     if img:
+        #         try:
+        #             image = Image.open(img)
+        #         except:
+        #             print('Open Error! Try again!')
+        #         else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
+        #             r_image = yolo.detect_image(image, crop = crop)
+        #             st.image(r_image)
+        #             # r_image.show()
+        #     else:
+        #         st.title(":balloon:You have not selected a picture :")
+        #         st.caption("buluuuuuuuuuuuu")
 
-        elif image_files_subset == 'Article Recommendation':
-            st.title('栏目二') 
+        # elif image_files_subset == 'Article Recommendation':
+        #     st.title('栏目二') 
 
-        elif image_files_subset == 'Recognition Exercise':
-            st.title('栏目三') 
+        # elif image_files_subset == 'Recognition Exercise':
+        #     st.title('栏目三') 
 
         # selected_species = st.sidebar.selectbox("Bird Type", types_of_birds)
         # available_images = load_list_of_images_available(
