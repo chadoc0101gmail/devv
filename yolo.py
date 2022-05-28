@@ -309,7 +309,7 @@ class YOLO(object):
             #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
             link_Baidu = 'https://baike.baidu.com/item/' + \
                 ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
-            st.title('预测结果(置信度最高)：{}  '.format(ChineseName[predicted_class]) (link_Baidu))
+            st.title(['预测结果(置信度最高)：{}  '.format(ChineseName[predicted_class])] (link_Baidu))
             df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
             # 显示识别故障鸟种置信度
             df.iloc[i, 1] = top_conf[top_label_index[i]]
