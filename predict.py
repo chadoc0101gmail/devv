@@ -6,9 +6,6 @@ import time
 import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
-# import cv2
-import requests
-import re
 import numpy as np
 from PIL import Image
 
