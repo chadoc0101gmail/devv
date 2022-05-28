@@ -236,7 +236,7 @@ class YOLO(object):
             top_conf    = results[0][:, 4] * results[0][:, 5]   #置信度
             top_boxes   = results[0][:, :4]
             #此处存在循环 num=len(np.unique(data))
-            st.subheader(':balloon:种类：{}     :balloon:个数：{}'.format(top_label, top_conf))
+            # st.subheader(':balloon:种类：{}     :balloon:个数：{}'.format(top_label, top_conf))
         #---------------------------------------------------------#
         #   设置字体与边框厚度
         #---------------------------------------------------------#
@@ -293,7 +293,8 @@ class YOLO(object):
             draw.text(text_origin, str(label,'UTF-8'), fill=(0, 0, 0), font=font)
             del draw
     ## 简单显示预测结果 ##
-        st.subheader(':balloon:预测结果：{}     :balloon:置信度：{:.2f}'.format(ChineseName[predicted_class],score))
+        st.title('预测结果(置信度最高)：{}  '.format(ChineseName[predicted_class]))
+        # st.title(':baby_chick:预测结果')
     ## 表格 
         df = pd.DataFrame(data=np.zeros((len(np.unique(top_label)), 6)),
             columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
@@ -307,7 +308,7 @@ class YOLO(object):
             # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
             #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
             link_Baidu = 'https://baike.baidu.com/item/' + \
-                ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接Wiki百科
+                ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
             df.iloc[i,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
             # 显示识别故障鸟种置信度
             df.iloc[i, 1] = top_conf[top_label_index[i]]

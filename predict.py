@@ -7,13 +7,30 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 # import cv2
+import requests
+import re
 import numpy as np
 from PIL import Image
 
 from yolo import YOLO
 
+COMMENT_TEMPLATE_MD = """{} - {}
+> {}"""
+
+def space(num_lines=1):
+    """Adds empty lines to the Streamlit app."""
+    for _ in range(num_lines):
+        st.write("")
 
 if __name__ == "__main__":
+    # Configures the default settings of the page.
+    # This must be the first Streamlit command used in your app, and must only be set once.
+    st.set_page_config(
+        page_title="Hazard Bird Detection",
+        page_icon=":baby_chick::baby_chick:",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )    
     yolo = YOLO()
     #----------------------------------------------------------------------------------------------------------#
     #   mode用于指定测试的模式：
@@ -69,12 +86,12 @@ if __name__ == "__main__":
                                 menu_icon="broadcast", default_index=0)
         if choose == "拍照识鸟":
             selecte0 = option_menu(None, ["智能识别", "涉鸟隐患"],
-                icons=['house', 'cloud-upload'],
+                icons=['card-image', 'cloud-upload'],
                 menu_icon="cast", default_index=0, orientation="horizontal")
             if selecte0 == "智能识别":
                 ####### 
-                st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:【Version in 2022.5.25】') #网页上的文本
-                st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:balloon:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。(LXX_Jo)') #加载图片
+                st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:') #网页上的文本
+                st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:balloon:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。') #加载图片
                 img = st.file_uploader('图片加载处') #加载图片
                 if img:
                     try:
@@ -84,11 +101,12 @@ if __name__ == "__main__":
                     else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
                         r_image = yolo.detect_image(image, crop = crop)
                         st.balloons()
+                        st.title('您选择的图片:')
                         st.image(r_image)
                         # r_image.show()
                 else:
-                    st.title(":pig:你还未选择图片:pig2:")
-                    st.caption("buluuuuuuuuuuuu")
+                    st.title(":exclamation:您还未选择图片")
+                    # st.caption("buluuuuuuuuuuuu")
                 ######  
             elif selecte0 == "涉鸟隐患":
                 st.title("涉鸟隐患")
@@ -138,19 +156,8 @@ if __name__ == "__main__":
 
 
         elif choose == "其他应用":
-            selecte5 = option_menu(None, ["Javascript", "展示PPT", "嵌入PDF"],
-                                icons=['house', 'cloud-upload', "list-task"],
-                                menu_icon="cast", default_index=0, orientation="horizontal")
+            st.title("1")
 
-            if selecte5 == "Javascript":
-                html.iframe("https://mp.weixin.qq.com/s/Sr4_IAK3pGWRLgjO51i8Mw")
-
-            elif selecte5 == "展示PPT":
-                html.iframe("https://mp.weixin.qq.com/s/i0VcKUHBCEHjoOYvoiGolQ")
-
-
-            elif selecte5 == "嵌入PDF":
-                html.iframe("https://mp.weixin.qq.com/s/W8DX74LZYdosDUXUIpoa1g")
         ##############################################
         # 侧边栏
         # dtype_file_structure_mapping = { #左边菜单栏Data Portion Type的4个选项
