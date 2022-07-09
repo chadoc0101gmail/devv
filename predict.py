@@ -124,7 +124,7 @@ if __name__ == "__main__":
                     # 读取某一帧
                     ref, frame = capture.read()
                     if not ref:
-                        st.title("涉鸟")
+                        st.title(ref)
                         break
                     st.title("涉")
                     # 格式转变，BGRtoRGB
