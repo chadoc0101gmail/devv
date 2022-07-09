@@ -117,6 +117,7 @@ if __name__ == "__main__":
                     except:
                         print('Open Error! Try again!')
                     else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
+                        st.title("涉鸟隐患")
                         fps = 0.0
                         while(True):
                             t1 = time.time()
