@@ -142,7 +142,8 @@ if __name__ == "__main__":
 
 #                             cv2.imshow("video",frame)
                       #显示图片
-                    st.image(frame)
+                    to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    image_placeholder.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
 #                     out.write(frame)
