@@ -139,7 +139,7 @@ if __name__ == "__main__":
 
 #                             cv2.imshow("video",frame)
                               #显示图片
-#                             st.image(frame)
+                            st.image(frame)
                             #图片转化为视频
                             c= cv2.waitKey(1) & 0xff
                             out.write(frame)
@@ -150,7 +150,7 @@ if __name__ == "__main__":
                                 capture.release()
                                 break
 
-#                         st.video(out)
+                         st.video(out)
                         print("Video Detection Done!")
                         capture.release()
                         if video_save_path!="":
