@@ -181,7 +181,7 @@ if __name__ == "__main__":
 #                 # st.video("./视频/地震.mp4")
 #                 st.title("视频")
         elif choose == "防鸟装置介绍":
-        
+            st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:') #网页上的文本
         elif choose == "数据可视化":
             selecte2 = option_menu(None, ["Echarts", "Plotly", "Streamlit-apex-charts"],
                                 icons=['house', 'cloud-upload', "list-task"],
