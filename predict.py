@@ -113,11 +113,10 @@ if __name__ == "__main__":
         elif choose == "视频识别":  
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
-#                 st.video(video_path)
+                st.video(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
-                st.video(capture)
                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")
@@ -128,6 +127,8 @@ if __name__ == "__main__":
                 frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
                 target = r'vidio2.mp4'
                 target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
+                st.video(target_video)
+                
                 timecount=1
                 timeF = 20
                 while (capture.isOpened()):
