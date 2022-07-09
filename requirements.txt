@@ -1,5 +1,6 @@
 streamlit
 tempfile
+cv2
 scipy
 numpy
 matplotlib
