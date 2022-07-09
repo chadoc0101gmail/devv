@@ -114,7 +114,7 @@ if __name__ == "__main__":
             if video_path:
                 st.video(video_path)
                 
-                capture = cv2.VideoCapture(st.video(video_path))
+                capture = cv2.VideoCapture(read(video_path))
                 st.title("涉鸟隐患")
                 fps = 0.0
                 while(True):
