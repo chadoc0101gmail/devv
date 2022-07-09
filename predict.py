@@ -159,12 +159,11 @@ if __name__ == "__main__":
                         else:
                             break
                 capture.release()
-                st.video(video_save_path)
+                if video_save_path!="":
+                    st.video(video_save_path)
+                    out.release()
                 out.release()
                     #图片转化为视频
-
-#                         print("Video Detection Done!")
-#                         capture.release()
 #                         if video_save_path!="":
 #                             print("Save processed video to the path :" + video_save_path)
 #                             out.release()
