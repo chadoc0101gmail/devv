@@ -163,8 +163,8 @@ if __name__ == "__main__":
             #                         st.title('您选择的图片:')
             #                         st.image(r_image)
                                     # r_image.show()
-                            else:
-                                st.title(":exclamation:您还未选择图片")
+            else:
+                st.title(":exclamation:您还未选择图片")
                                 # st.caption("buluuuuuuuuuuuu")
                             ######  
 
