@@ -9,4 +9,4 @@ tqdm
 Pillow
 h5py
 streamlit_option_menu
-tempfile
+pip install tempfile -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
