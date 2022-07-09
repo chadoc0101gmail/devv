@@ -8,7 +8,7 @@ from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 import numpy as np
 from PIL import Image
-#import tempfile
+import os
 from yolo import YOLO
 import cv2
 COMMENT_TEMPLATE_MD = """{} - {}
