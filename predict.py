@@ -150,7 +150,7 @@ if __name__ == "__main__":
                                 capture.release()
                                 break
 
-                         st.video(out)
+                        st.video(out)
                         print("Video Detection Done!")
                         capture.release()
                         if video_save_path!="":
