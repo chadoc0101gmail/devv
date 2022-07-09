@@ -117,16 +117,16 @@ if __name__ == "__main__":
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
-                st.title(video_path)
-                fps = 0.0
-                while(True):
+                fps = 0.0           
+                if (capture.isOpened() == False):
+                        st.write("Error opening video stream or file")
+                while (capture.isOpened()):
                     t1 = time.time()
                     # 读取某一帧
                     ref, frame = capture.read()#在这里ref返回false，导致视频一进去就退出循环
                     if not ref:
                         st.title(ref)
                         break
-                    st.title("涉")
                     # 格式转变，BGRtoRGB
                     frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
                     # 转变成Image
@@ -142,8 +142,14 @@ if __name__ == "__main__":
 
 #                             cv2.imshow("video",frame)
                       #显示图片
-                    to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                    image_placeholder.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                    
+                    if ref:
+                        to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                        st.image_placeholder.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                    else:
+                        break
+                cap.release()
+
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
 #                     out.write(frame)
