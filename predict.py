@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 import tempfile
 from yolo import YOLO
-
+import cv2
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
