@@ -111,10 +111,6 @@ if __name__ == "__main__":
        
 
         elif choose == "视频识别":  
-            if video_save_path!="":
-                fourcc  = cv2.VideoWriter_fourcc(*'XVID')
-                size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-                out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
                 st.video(video_path)
@@ -122,6 +118,10 @@ if __name__ == "__main__":
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
+                if video_save_path!="":
+                    fourcc  = cv2.VideoWriter_fourcc(*'XVID')
+                    size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+                    out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")
