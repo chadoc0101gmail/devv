@@ -117,7 +117,7 @@ if __name__ == "__main__":
                     f.write(video_path.getbuffer())
                 video_path = f'phote/{video_path.name}'
                 capture = cv2.VideoCapture(video_path)
-                st.title("涉鸟隐患")
+                st.title(capture)
                 fps = 0.0
                 while(True):
                     t1 = time.time()
