@@ -114,6 +114,7 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
                 st.video(video_path)
+                st.video(target)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
@@ -159,8 +160,7 @@ if __name__ == "__main__":
                         else:
                             break
                 capture.release()
-                st.video(target)
-#                 target_video.release()
+                target_video.release()
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
 #                     out.write(frame)
