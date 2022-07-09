@@ -11,6 +11,7 @@ from PIL import Image
 import os
 from yolo import YOLO
 import cv2
+import tempfile
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
