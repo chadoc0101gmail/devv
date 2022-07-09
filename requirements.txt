@@ -9,6 +9,4 @@ tqdm
 Pillow
 h5py
 streamlit_option_menu
-pip install https://pypi.tuna.tsinghua.edu.cn/simple
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn tempfile
-pip install  --user -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn tempfile
+pip install tempfile -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
