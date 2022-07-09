@@ -113,13 +113,12 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处')
             if video_path:
                     try:
-                        st.title("涉鸟隐患")
-                        capture = cv2.VideoCapture(video_path)
-                        st.title(capture)
+                        capture = video_path
+#                         capture = cv2.VideoCapture(video_path)
                     except:
                         print('Open Error! Try again!')
                     else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
-                        
+                        st.title("涉鸟隐患")
                         fps = 0.0
                         while(True):
                             t1 = time.time()
