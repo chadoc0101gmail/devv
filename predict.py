@@ -160,8 +160,7 @@ if __name__ == "__main__":
                             break
                 capture.release()
                 st.video(out.read())
-#                 st.video(target)
-#                 target_video.release()
+                out.release()
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
                     
