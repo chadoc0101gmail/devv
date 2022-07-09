@@ -112,8 +112,8 @@ if __name__ == "__main__":
         elif choose == "视频识别":  
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
-                with open(video_path, "wb") as f:
-                    f.write(video_path.getbuffer())
+                st.video(video_path)
+                
                 capture = cv2.VideoCapture(video_path)
                 st.title("涉鸟隐患")
                 fps = 0.0
