@@ -127,8 +127,7 @@ if __name__ == "__main__":
                 frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
                 target = r'vidio2.mp4'
                 target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
-                st.video(target)
-                
+
                 timecount=1
                 timeF = 20
                 while (capture.isOpened()):
@@ -160,6 +159,7 @@ if __name__ == "__main__":
                         else:
                             break
                 capture.release()
+                st.video(target)
                 target_video.release()
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
