@@ -123,7 +123,7 @@ if __name__ == "__main__":
                 while (capture.isOpened()):
                     t1 = time.time()
                     # 读取某一帧
-                    ref, frame = capture.read()#在这里ref返回false，导致视频一进去就退出循环
+                    ref, frame = capture.read()
                     if not ref:
                         st.title(ref)
                         break
@@ -137,7 +137,7 @@ if __name__ == "__main__":
                     frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
 
                     fps  = ( fps + (1./(time.time()-t1)) ) / 2
-                    print("fps= %.2f"%(fps))
+#                     print("fps= %.2f"%(fps))
                     frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
 #                             cv2.imshow("video",frame)
