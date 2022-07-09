@@ -110,18 +110,58 @@ if __name__ == "__main__":
        
 
         elif choose == "图片/音乐/视频":
-            selecte1 = option_menu(None, ["图片", "音乐", "视频"],
-                icons=['house', 'cloud-upload', "list-task"],
-                menu_icon="cast", default_index=0, orientation="horizontal")
-            if selecte1 == "图片":
-                st.title("随便放张图")
-                st.image("./photo/1.jpg")
-            elif selecte1 == "音乐":
-                # st.audio("./音乐/music.mp3")
-                st.title("音乐")
-            elif selecte1 == "视频":
-                # st.video("./视频/地震.mp4")
-                st.title("视频")
+            capture = st.file_uploader('视频加载处')
+            fps = 0.0
+            while(True):
+                t1 = time.time()
+                # 读取某一帧
+                ref, frame = capture.read()
+                if not ref:
+                    break
+                # 格式转变，BGRtoRGB
+                frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+                # 转变成Image
+                frame = Image.fromarray(np.uint8(frame))
+                # 进行检测
+                frame = np.array(yolo.detect_image(frame))
+                # RGBtoBGR满足opencv显示格式
+                frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
+
+                fps  = ( fps + (1./(time.time()-t1)) ) / 2
+                print("fps= %.2f"%(fps))
+                frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+                #cv2.imshow("video",frame)
+                st.image(frame)
+                
+                c= cv2.waitKey(1) & 0xff
+                out.write(frame)
+#                 if video_save_path!="":
+#                     out.write(frame)
+
+                if c==27:
+                    capture.release()
+                    break
+            
+#             st.video(out)
+            print("Video Detection Done!")
+            capture.release()
+            if video_save_path!="":
+                print("Save processed video to the path :" + video_save_path)
+                out.release()
+            cv2.destroyAllWindows()
+#             selecte1 = option_menu(None, ["图片", "音乐", "视频"],
+#                 icons=['house', 'cloud-upload', "list-task"],
+#                 menu_icon="cast", default_index=0, orientation="horizontal")
+#             if selecte1 == "图片":
+#                 st.title("随便放张图")
+#                 st.image("./photo/1.jpg")
+#             elif selecte1 == "音乐":
+#                 # st.audio("./音乐/music.mp3")
+#                 st.title("音乐")
+#             elif selecte1 == "视频":
+#                 # st.video("./视频/地震.mp4")
+#                 st.title("视频")
 
         elif choose == "数据可视化":
             selecte2 = option_menu(None, ["Echarts", "Plotly", "Streamlit-apex-charts"],
