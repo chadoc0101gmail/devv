@@ -1,8 +1,8 @@
-streamlit
+treamlit
 scipy
 numpy
 matplotlib
-opencv-python
+opencv_python
 torch
 torchvision
 tqdm
