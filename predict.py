@@ -111,6 +111,10 @@ if __name__ == "__main__":
        
 
         elif choose == "视频识别":  
+            if video_save_path!="":
+                fourcc  = cv2.VideoWriter_fourcc(*'XVID')
+                size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+                out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
                 st.video(video_path)
@@ -159,31 +163,26 @@ if __name__ == "__main__":
                             st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
-                capture.release()
-                st.video(target)
-                target_video.release()
+#                 capture.release()
+#                 st.video(target)
+#                 target_video.release()
                     #图片转化为视频
-#                     c= cv2.waitKey(1) & 0xff
-#                     out.write(frame)
-#                             if video_save_path!="":
-#                                 out.write(frame)
+                    c= cv2.waitKey(1) & 0xff
+                    out.write(frame)
+                        if video_save_path!="":
+                            out.write(frame)
 
-#                     if c==27:
-#                         capture.release()
-#                         break
+                    if c==27:
+                        capture.release()
+                        break
 
 
 #                         print("Video Detection Done!")
-#                         capture.release()
-#                         if video_save_path!="":
+                        capture.release()
+                        if video_save_path!="":
 #                             print("Save processed video to the path :" + video_save_path)
-#                             out.release()
-#                         cv2.destroyAllWindows()
-            #                         r_image = yolo.detect_image(image, crop = crop)
-            #                         st.balloons()
-            #                         st.title('您选择的图片:')
-            #                         st.image(r_image)
-                                    # r_image.show()
+                            out.release()
+                        cv2.destroyAllWindows()
             else:
                 st.title(":exclamation:您还未选择视频文件")
 
