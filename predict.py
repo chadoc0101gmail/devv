@@ -150,11 +150,10 @@ if __name__ == "__main__":
                         # RGBtoBGR满足opencv显示格式
                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                        if video_save_path!="":
-                            out.write(frame)
- 
                         if ref:
                             to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                            if video_save_path!="":
+                                out.write(to_show)
                             st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
