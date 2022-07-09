@@ -137,7 +137,7 @@ if __name__ == "__main__":
                     if not ref:
                         st.title(ref)
                         break
-                    timecount = timecount++
+                    timecount = timecount + 1
                     if(timecount%timeF == 0):
                         timecount=1
                         # 格式转变，BGRtoRGB
