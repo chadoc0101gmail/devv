@@ -120,10 +120,19 @@ if __name__ == "__main__":
                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")
+                        
+                fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
+                width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+                height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+                frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
+                target = r'vidio2.mp4'
+                target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
+                
                 while (capture.isOpened()):
-                    t1 = time.time()
+                    capture.set(cv2.CAP_PROP_POS_FRAMES, 100)
                     # 读取某一帧
                     ref, frame = capture.read()
+
                     if not ref:
                         st.title(ref)
                         break
@@ -135,8 +144,7 @@ if __name__ == "__main__":
                     frame = np.array(yolo.detect_image(frame))
                     # RGBtoBGR满足opencv显示格式
                     frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-
-                    fps  = ( fps + (1./(time.time()-t1)) ) / 2
+                    
 #                     print("fps= %.2f"%(fps))
                     frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
@@ -149,7 +157,8 @@ if __name__ == "__main__":
                     else:
                         break
                 capture.release()
-
+                target_video.release()
+                cv2.destroyAllWindows()
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
 #                     out.write(frame)
