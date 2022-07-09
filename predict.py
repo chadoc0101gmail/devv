@@ -114,9 +114,8 @@ if __name__ == "__main__":
             if video_path:
                     try:
                          capture = cv2.VideoCapture(video_path)
-                    except:
-                        print('Open Error! Try again!')
-                    else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
+                    
+                    #else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
                         st.title("涉鸟隐患")
                         fps = 0.0
                         while(True):
@@ -158,7 +157,8 @@ if __name__ == "__main__":
                             print("Save processed video to the path :" + video_save_path)
                             out.release()
                         cv2.destroyAllWindows()
-
+                    except:
+                        print('Open Error! Try again!')
             #                         r_image = yolo.detect_image(image, crop = crop)
             #                         st.balloons()
             #                         st.title('您选择的图片:')
