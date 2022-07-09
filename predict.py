@@ -116,7 +116,7 @@ if __name__ == "__main__":
                 with open(os.path.join("photo", video_path.name), "wb") as f:
                     f.write(video_path.getbuffer())
                 video_path = f'phote/{video_path.name}'
-                capture = cv2.VideoCapture(video_path)
+                capture =  video_path #cv2.VideoCapture(video_path)
                 st.title(video_path)
                 fps = 0.0
                 while(True):
