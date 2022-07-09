@@ -169,8 +169,8 @@ if __name__ == "__main__":
                     #图片转化为视频
                     c= cv2.waitKey(1) & 0xff
                     out.write(frame)
-                        if video_save_path!="":
-                            out.write(frame)
+                    if video_save_path!="":
+                        out.write(frame)
 
                     if c==27:
                         capture.release()
