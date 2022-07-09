@@ -127,11 +127,7 @@ if __name__ == "__main__":
                         st.write("Error opening video stream or file")
                         
                 fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
-                width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-                height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-                frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
-                target = r'vidio2.mp4'
-                target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
+                
                 
                 timecount=1
                 timeF = 20
@@ -154,35 +150,35 @@ if __name__ == "__main__":
                         # RGBtoBGR满足opencv显示格式
                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                        target_video.write(frame)
-    #                             cv2.imshow("video",frame)
-                          #显示图片
-
+                        if video_save_path!="":
+                            out.write(frame)
+ 
                         if ref:
                             to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                             st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
-#                 capture.release()
+                capture.release()
+                st.video(out.read())
 #                 st.video(target)
 #                 target_video.release()
                     #图片转化为视频
-                    c= cv2.waitKey(1) && 0xff
-                    out.write(frame)
-                    if video_save_path!="":
-                        out.write(frame)
+#                     c= cv2.waitKey(1) & 0xff
+                    
+                    
+#                         out.write(frame)
 
-                    if c==27:
-                        capture.release()
-                        break
+#                     if c==27:
+#                         capture.release()
+#                         break
 
 
 #                         print("Video Detection Done!")
-                        capture.release()
-                        if video_save_path!="":
+#                         capture.release()
+#                         if video_save_path!="":
 #                             print("Save processed video to the path :" + video_save_path)
-                            out.release()
-                        cv2.destroyAllWindows()
+#                             out.release()
+#                         cv2.destroyAllWindows()
             else:
                 st.title(":exclamation:您还未选择视频文件")
 
