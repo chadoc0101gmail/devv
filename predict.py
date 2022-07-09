@@ -159,18 +159,9 @@ if __name__ == "__main__":
                         else:
                             break
                 capture.release()
-                st.video(out.read())
+                st.video(video_save_path)
                 out.release()
                     #图片转化为视频
-#                     c= cv2.waitKey(1) & 0xff
-                    
-                    
-#                         out.write(frame)
-
-#                     if c==27:
-#                         capture.release()
-#                         break
-
 
 #                         print("Video Detection Done!")
 #                         capture.release()
