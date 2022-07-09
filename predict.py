@@ -145,7 +145,7 @@ if __name__ == "__main__":
                     
                     if ref:
                         to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                        st.image_placeholder.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                        image_placeholder.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                     else:
                         break
                 cap.release()
