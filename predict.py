@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
         elif choose == "图片/音乐/视频":
             video_path = st.file_uploader('视频加载处')
-            if video:
+            if video_path:
                     try:
                         capture = cv2.VideoCapture(video_path)
                     except:
