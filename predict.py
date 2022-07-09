@@ -112,8 +112,7 @@ if __name__ == "__main__":
         elif choose == "视频识别":
             
             image_placeholder = st.empty()
-            f = st.file_uploader('视频加载处')
-            f = st.file_uploader("Upload file")  # 上传本地视频
+            f = st.file_uploader('视频加载处')  # 上传本地视频
             if f is not None:
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(f.read())
