@@ -144,22 +144,22 @@ if __name__ == "__main__":
                       #显示图片
                     st.image(frame)
                     #图片转化为视频
-                    c= cv2.waitKey(1) & 0xff
-                    out.write(frame)
+#                     c= cv2.waitKey(1) & 0xff
+#                     out.write(frame)
 #                             if video_save_path!="":
 #                                 out.write(frame)
 
-                    if c==27:
-                        capture.release()
-                        break
+#                     if c==27:
+#                         capture.release()
+#                         break
 
-                        st.video(out)
-                        print("Video Detection Done!")
-                        capture.release()
-                        if video_save_path!="":
-                            print("Save processed video to the path :" + video_save_path)
-                            out.release()
-                        cv2.destroyAllWindows()
+
+#                         print("Video Detection Done!")
+#                         capture.release()
+#                         if video_save_path!="":
+#                             print("Save processed video to the path :" + video_save_path)
+#                             out.release()
+#                         cv2.destroyAllWindows()
             #                         r_image = yolo.detect_image(image, crop = crop)
             #                         st.balloons()
             #                         st.title('您选择的图片:')
