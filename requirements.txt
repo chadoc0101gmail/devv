@@ -9,4 +9,4 @@ tqdm
 Pillow
 h5py
 streamlit_option_menu
-pip install tempfile
+tempfile
