@@ -115,6 +115,7 @@ if __name__ == "__main__":
                     try:
                         st.title("涉鸟隐患")
                         capture = cv2.VideoCapture(video_path)
+                        st.title(capture)
                     except:
                         print('Open Error! Try again!')
                     else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
