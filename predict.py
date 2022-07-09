@@ -78,7 +78,7 @@ if __name__ == "__main__":
         # '''
 
         with st.sidebar:
-            choose = option_menu("甄羽Streamlit", ["拍照识鸟", "图片/音乐/视频", "数据可视化", "地图分布", "其他应用"],
+            choose = option_menu("甄羽Streamlit", ["拍照识鸟", "视频识别","防鸟装置介绍", "数据可视化", "地图分布", "其他应用"],
                                 icons=['camera-fill', 'file-earmark-music', 'bar-chart', 'brightness-high'], # 对应的小图标，不用改
                                 menu_icon="broadcast", default_index=0)
         if choose == "拍照识鸟":
