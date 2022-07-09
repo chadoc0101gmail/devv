@@ -124,7 +124,9 @@ if __name__ == "__main__":
                     # 读取某一帧
                     ref, frame = capture.read()
                     if not ref:
+                        st.title("涉鸟")
                         break
+                    st.title("涉")
                     # 格式转变，BGRtoRGB
                     frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
                     # 转变成Image
