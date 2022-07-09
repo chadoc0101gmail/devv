@@ -148,7 +148,7 @@ if __name__ == "__main__":
                         st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                     else:
                         break
-                cap.release()
+                capture.release()
 
                     #图片转化为视频
 #                     c= cv2.waitKey(1) & 0xff
