@@ -167,7 +167,7 @@ if __name__ == "__main__":
 #                 st.video(target)
 #                 target_video.release()
                     #图片转化为视频
-                    c= cv2.waitKey(1) & 0xff
+                    c= cv2.waitKey(1) && 0xff
                     out.write(frame)
                     if video_save_path!="":
                         out.write(frame)
