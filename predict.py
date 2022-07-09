@@ -181,10 +181,24 @@ if __name__ == "__main__":
 #                 # st.video("./视频/地震.mp4")
 #                 st.title("视频")
         elif choose == "防鸟装置介绍":
+            st.title(':baby_chick:防鸟装置介绍\n你好 :sunglasses:') 
+            Options = ["防鸟刺","防鸟挡板","防鸟盒","防鸟针板","防鸟罩","防鸟护套","人造栖鸟平台","旋转式风车、反光镜等惊鸟装置","声光等电子式驱鸟装置"]
+            choose = st.selectbox("在这里选择您想要了解的防鸟装置", Options)
+            st.spinner(text='资源加载中...')
+            if choose == "防鸟刺":
+                st.info('防鸟刺是由多根长刺组成的制品，各长刺在底部集中固定，另一端向上均匀散开，安装于线路绝缘子串上方，以防止大型鸟类在绝缘子串上方栖息和泄粪，如图所示。
+                        防鸟刺包括防鸟刺本体和连接金具。防鸟刺分为防鸟直刺(FNCZ)、防鸟弹簧刺(FNCT)和防鸟异型刺(FNCY)三类，如图所示。
+                        连接金具按照连接形式可分为 U 型和 L 型，按照功能可分为倾倒型(Q)和非倾125倒型(FQ)，如图所示。') 
+            if choose == "防鸟挡板":
+                st.info('') 
+            if choose == "防鸟盒":        
+            if choose == "防鸟针板":
+            if choose == "防鸟罩":
+            if choose == "防鸟护套":
+            if choose == "人造栖鸟平台":
+            if choose == "旋转式风车、反光镜等惊鸟装置":
+            if choose == "声光等电子式驱鸟装置":
             
-            Options = ["a-box","a-sphere","a-cylinder","a-plane","a-cone","a-torus-knot","a-ring","a-dodecahedron","a-icosahedron"]
-            choose = st.selectbox("Pick a primitive:", Options)
-            #if choose == "a-box":
                 
         elif choose == "数据可视化":
             selecte2 = option_menu(None, ["Echarts", "Plotly", "Streamlit-apex-charts"],
