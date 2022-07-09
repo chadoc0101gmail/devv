@@ -113,8 +113,10 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
                 st.video(video_path)
-                
-                capture = cv2.VideoCapture(read(video_path))
+                with open(os.path.join("phote", video_path.name), "wb") as f:
+                    f.write(video_path.getbuffer())
+                capture = f'phote/{video_path.name}'
+#                 capture = cv2.VideoCapture(read(video_path))
                 st.title("涉鸟隐患")
                 fps = 0.0
                 while(True):
