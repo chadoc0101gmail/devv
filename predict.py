@@ -181,9 +181,9 @@ if __name__ == "__main__":
 #                 # st.video("./视频/地震.mp4")
 #                 st.title("视频")
         elif choose == "防鸟装置介绍":
-            st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:') #网页上的文本
+            
             Options = ["a-box","a-sphere","a-cylinder","a-plane","a-cone","a-torus-knot","a-ring","a-dodecahedron","a-icosahedron"]
-            choose = st.sidebar.selectbox("Pick a primitive:", Options)
+            choose = st.selectbox("Pick a primitive:", Options)
             #if choose == "a-box":
                 
         elif choose == "数据可视化":
