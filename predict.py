@@ -127,7 +127,8 @@ if __name__ == "__main__":
                 frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
                 target = r'vidio2.mp4'
                 target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
-                
+                timecount=1
+                timeF = 20
                 while (capture.isOpened()):
 #                     capture.set(cv2.CAP_PROP_POS_FRAMES, 100)
                     # 读取某一帧
@@ -136,26 +137,29 @@ if __name__ == "__main__":
                     if not ref:
                         st.title(ref)
                         break
-                    # 格式转变，BGRtoRGB
-                    frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-                    # 转变成Image
-                    frame = Image.fromarray(np.uint8(frame))
-                    # 进行检测
-                    frame = np.array(yolo.detect_image(frame))
-                    # RGBtoBGR满足opencv显示格式
-                    frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-                    
-#                     print("fps= %.2f"%(fps))
-                    frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    timecount = timecount++
+                    if(timecount%timeF == 0):
+                        timecount=1
+                        # 格式转变，BGRtoRGB
+                        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+                        # 转变成Image
+                        frame = Image.fromarray(np.uint8(frame))
+                        # 进行检测
+                        frame = np.array(yolo.detect_image(frame))
+                        # RGBtoBGR满足opencv显示格式
+                        frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
 
-#                             cv2.imshow("video",frame)
-                      #显示图片
-                    
-                    if ref:
-                        to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                        st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
-                    else:
-                        break
+    #                     print("fps= %.2f"%(fps))
+                        frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    #                             cv2.imshow("video",frame)
+                          #显示图片
+
+                        if ref:
+                            to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                            st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                        else:
+                            break
                 capture.release()
                 target_video.release()
                 cv2.destroyAllWindows()
