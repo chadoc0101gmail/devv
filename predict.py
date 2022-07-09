@@ -129,7 +129,7 @@ if __name__ == "__main__":
                 target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
                 
                 while (capture.isOpened()):
-                    capture.set(cv2.CAP_PROP_POS_FRAMES, 100)
+#                     capture.set(cv2.CAP_PROP_POS_FRAMES, 100)
                     # 读取某一帧
                     ref, frame = capture.read()
 
