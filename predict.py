@@ -127,12 +127,11 @@ if __name__ == "__main__":
                 frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
                 target = r'vidio2.mp4'
                 target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
-                st.video(target_video)
+                st.video(target)
                 
                 timecount=1
                 timeF = 20
                 while (capture.isOpened()):
-#                     capture.set(cv2.CAP_PROP_POS_FRAMES, 100)
                     # 读取某一帧
                     ref, frame = capture.read()
 
@@ -150,10 +149,8 @@ if __name__ == "__main__":
                         frame = np.array(yolo.detect_image(frame))
                         # RGBtoBGR满足opencv显示格式
                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-
-    #                     print("fps= %.2f"%(fps))
                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-
+                        target_video.write(frame)
     #                             cv2.imshow("video",frame)
                           #显示图片
 
