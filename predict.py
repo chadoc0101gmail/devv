@@ -8,7 +8,7 @@ from streamlit_option_menu import option_menu
 import streamlit.components.v1 as html
 import numpy as np
 from PIL import Image
-
+import tempfile
 from yolo import YOLO
 
 COMMENT_TEMPLATE_MD = """{} - {}
@@ -110,55 +110,76 @@ if __name__ == "__main__":
        
 
         elif choose == "视频识别":
-            video_path = st.file_uploader('视频加载处')
-            if video_path:
-                    try:
-                        capture = video_path
-#                         capture = cv2.VideoCapture(video_path)
-                    except:
-                        print('Open Error! Try again!')
-                    else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
-                        st.title("涉鸟隐患")
-                        fps = 0.0
-                        while(True):
-                            t1 = time.time()
-                            # 读取某一帧
-                            ref, frame = capture.read()
-                            if not ref:
-                                break
-                            # 格式转变，BGRtoRGB
-                            frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-                            # 转变成Image
-                            frame = Image.fromarray(np.uint8(frame))
-                            # 进行检测
-                            frame = np.array(yolo.detect_image(frame))
-                            # RGBtoBGR满足opencv显示格式
-                            frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
+            
+            image_placeholder = st.empty()
+            f = st.file_uploader('视频加载处')
+            f = st.file_uploader("Upload file")  # 上传本地视频
+            if f is not None:
+                tfile = tempfile.NamedTemporaryFile(delete=False)
+                tfile.write(f.read())
 
-                            fps  = ( fps + (1./(time.time()-t1)) ) / 2
-                            print("fps= %.2f"%(fps))
-                            frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                cap = cv2.VideoCapture(tfile.name)  # opencv打开文件
 
-#                             cv2.imshow("video",frame)
-                              #显示图片
-                            st.image(frame)
-                            #图片转化为视频
-                            c= cv2.waitKey(1) & 0xff
-                            out.write(frame)
-#                             if video_save_path!="":
-#                                 out.write(frame)
+                if (cap.isOpened() == False):
+                    st.write("Error opening video stream or file")
 
-                            if c==27:
-                                capture.release()
-                                break
+                while (cap.isOpened()):
+                    success, frame = cap.read()
+                    if success:
+                        to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                        image_placeholder.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                    else:
+                        break
+                cap.release()
 
-                        st.video(out)
-                        print("Video Detection Done!")
-                        capture.release()
-                        if video_save_path!="":
-                            print("Save processed video to the path :" + video_save_path)
-                            out.release()
-                        cv2.destroyAllWindows()
+#             if video_path:
+#                     try:
+#                         capture = video_path
+# #                         capture = cv2.VideoCapture(video_path)
+#                     except:
+#                         print('Open Error! Try again!')
+#                     else:# 使用 else 包裹的代码，只有当 try 块没有捕获到任何异常时，才会得到执行
+#                         st.title("涉鸟隐患")
+#                         fps = 0.0
+#                         while(True):
+#                             t1 = time.time()
+#                             # 读取某一帧
+#                             ref, frame = capture.read()
+#                             if not ref:
+#                                 break
+#                             # 格式转变，BGRtoRGB
+#                             frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+#                             # 转变成Image
+#                             frame = Image.fromarray(np.uint8(frame))
+#                             # 进行检测
+#                             frame = np.array(yolo.detect_image(frame))
+#                             # RGBtoBGR满足opencv显示格式
+#                             frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
+
+#                             fps  = ( fps + (1./(time.time()-t1)) ) / 2
+#                             print("fps= %.2f"%(fps))
+#                             frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+# #                             cv2.imshow("video",frame)
+#                               #显示图片
+#                             st.image(frame)
+#                             #图片转化为视频
+#                             c= cv2.waitKey(1) & 0xff
+#                             out.write(frame)
+# #                             if video_save_path!="":
+# #                                 out.write(frame)
+
+#                             if c==27:
+#                                 capture.release()
+#                                 break
+
+#                         st.video(out)
+#                         print("Video Detection Done!")
+#                         capture.release()
+#                         if video_save_path!="":
+#                             print("Save processed video to the path :" + video_save_path)
+#                             out.release()
+#                         cv2.destroyAllWindows()
 
             #                         r_image = yolo.detect_image(image, crop = crop)
             #                         st.balloons()
