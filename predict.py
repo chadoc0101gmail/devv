@@ -109,7 +109,7 @@ if __name__ == "__main__":
                 st.title("涉鸟隐患")
        
 
-        elif choose == "图片/音乐/视频":
+        elif choose == "视频识别":
             video_path = st.file_uploader('视频加载处')
             if video_path:
                     try:
@@ -180,7 +180,8 @@ if __name__ == "__main__":
 #             elif selecte1 == "视频":
 #                 # st.video("./视频/地震.mp4")
 #                 st.title("视频")
-
+        elif choose == "防鸟装置介绍":
+        
         elif choose == "数据可视化":
             selecte2 = option_menu(None, ["Echarts", "Plotly", "Streamlit-apex-charts"],
                                 icons=['house', 'cloud-upload', "list-task"],
