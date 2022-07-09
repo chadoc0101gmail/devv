@@ -115,8 +115,8 @@ if __name__ == "__main__":
                 st.video(video_path)
                 with open(os.path.join("photo", video_path.name), "wb") as f:
                     f.write(video_path.getbuffer())
-                capture = f'phote/{video_path.name}'
-#                 capture = cv2.VideoCapture(read(video_path))
+                video_path = f'phote/{video_path.name}'
+                capture = cv2.VideoCapture(read(video_path))
                 st.title("涉鸟隐患")
                 fps = 0.0
                 while(True):
