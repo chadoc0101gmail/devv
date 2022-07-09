@@ -122,7 +122,7 @@ if __name__ == "__main__":
                 while(True):
                     t1 = time.time()
                     # 读取某一帧
-                    ref, frame = capture.read()
+                    ref, frame = capture.read()#在这里ref返回false，导致视频一进去就退出循环
                     if not ref:
                         st.title(ref)
                         break
@@ -166,9 +166,7 @@ if __name__ == "__main__":
             #                         st.image(r_image)
                                     # r_image.show()
             else:
-                st.title(":exclamation:您还未选择图片")
-                                # st.caption("buluuuuuuuuuuuu")
-                            ######  
+                st.title(":exclamation:您还未选择视频文件")
 
 #             selecte1 = option_menu(None, ["图片", "音乐", "视频"],
 #                 icons=['house', 'cloud-upload', "list-task"],
@@ -184,6 +182,10 @@ if __name__ == "__main__":
 #                 st.title("视频")
         elif choose == "防鸟装置介绍":
             st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:') #网页上的文本
+            Options = ["a-box","a-sphere","a-cylinder","a-plane","a-cone","a-torus-knot","a-ring","a-dodecahedron","a-icosahedron"]
+            choose = st.sidebar.selectbox("Pick a primitive:", Options)
+            #if choose == "a-box":
+                
         elif choose == "数据可视化":
             selecte2 = option_menu(None, ["Echarts", "Plotly", "Streamlit-apex-charts"],
                                 icons=['house', 'cloud-upload', "list-task"],
