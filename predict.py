@@ -114,7 +114,7 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
                 st.video(video_path)
-                st.video(target)
+                
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
@@ -127,8 +127,8 @@ if __name__ == "__main__":
                 height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
                 frame_counter = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
                 target = r'vidio2.mp4'
-                target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
-
+#                 target_video = cv2.VideoWriter(target, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, (width, height))
+                st.video(target)
                 timecount=1
                 timeF = 20
                 while (capture.isOpened()):
