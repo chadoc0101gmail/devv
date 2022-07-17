@@ -136,7 +136,7 @@ if __name__ == "__main__":
                         st.title(ref)
                         break
                     frame_counter += 1
-                    if frame_counter == 10:
+                    if frame_counter == 24:
                         frame_counter = 0
                         # 格式转变，BGRtoRGB
                         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
@@ -156,7 +156,7 @@ if __name__ == "__main__":
                             break
                 capture.release()
                 if video_save_path!="":
-                    st.video(video_save_path)
+                    #st.video(video_save_path)
                     #out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
