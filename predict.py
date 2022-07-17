@@ -129,8 +129,8 @@ if __name__ == "__main__":
                 while (capture.isOpened()):
                     # 读取某一帧
                     ref, frame = capture.read()
-#                     if not ref:
-#                         break
+                    if not ref:
+                        break
                     frame_counter += 1
                     if frame_counter == 24:
                         frame_counter = 0
