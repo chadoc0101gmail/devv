@@ -118,6 +118,7 @@ if __name__ == "__main__":
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
                 if video_save_path!="":
+                    #保存视频
                     fourcc  = cv2.VideoWriter_fourcc(*'XVID')
                     size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
                     out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
@@ -146,12 +147,14 @@ if __name__ == "__main__":
                         if ref:
                             to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                             if video_save_path!="":
+                                #保存视频
                                 out.write(to_show)
                                 st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
                 capture.release()
                 if video_save_path!="":
+                    #播放视频
                     st.video(video_save_path)
                     out.release()
                     #图片转化为视频
