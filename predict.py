@@ -153,7 +153,7 @@ if __name__ == "__main__":
                             break
                 capture.release()
                 if video_save_path!="":
-                    st.video(video_save_path)
+                    #st.video(video_save_path)
                     #out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
