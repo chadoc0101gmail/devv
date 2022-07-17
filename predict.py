@@ -134,13 +134,12 @@ if __name__ == "__main__":
                 while (capture.isOpened()):
                     # 读取某一帧
                     ref, frame = capture.read()
-
                     if not ref:
                         st.title(ref)
                         break
-                    timecount = timecount + 1
-                    if(timecount%timeF == 0):
-                        timecount=1
+                    frame_counter += 1
+                    if frame_counter == int(cap.get(cv2.CAP_PROP_FRAME_COUNT)):
+                        frame_counter = 0
                         # 格式转变，BGRtoRGB
                         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
                         # 转变成Image
@@ -159,7 +158,7 @@ if __name__ == "__main__":
                             break
                 capture.release()
                 if video_save_path!="":
-                    st.video(f"yyy.mp4")
+                    st.video(video_save_path)
                     out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
