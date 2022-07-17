@@ -147,13 +147,13 @@ if __name__ == "__main__":
                             to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                             if video_save_path!="":
                                 out.write(to_show)
-                            st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                                st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
-#                 capture.release()
+                capture.release()
                 if video_save_path!="":
                     st.video(video_save_path)
-                    #out.release()
+                    out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
 #                             print("Save processed video to the path :" + video_save_path)
