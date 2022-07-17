@@ -123,11 +123,8 @@ if __name__ == "__main__":
                     out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
                 fps = 0.0           
                 if (capture.isOpened() == False):
-                        st.write("Error opening video stream or file")
-                        
+                        st.write("Error opening video stream or file")   
                 fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
-                
-                
                 frame_counter = 0
                 while (capture.isOpened()):
                     # 读取某一帧
@@ -156,7 +153,7 @@ if __name__ == "__main__":
                             break
                 capture.release()
                 if video_save_path!="":
-                    #st.video(video_save_path)
+                    st.video(video_save_path)
                     #out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
