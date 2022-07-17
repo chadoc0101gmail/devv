@@ -114,7 +114,6 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             if video_path:
                 st.video(video_path)
-                
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
@@ -137,7 +136,7 @@ if __name__ == "__main__":
                         st.title(ref)
                         break
                     frame_counter += 1
-                    if frame_counter == int(capture.get(cv2.CAP_PROP_FRAME_COUNT)):
+                    if frame_counter == int(capture.get(cv2.CAP_PROP_FRAME_COUNT))/10:
                         frame_counter = 0
                         # 格式转变，BGRtoRGB
                         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
