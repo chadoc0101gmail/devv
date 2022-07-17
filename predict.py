@@ -150,9 +150,9 @@ if __name__ == "__main__":
                             st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
-                capture.release()
-#                 if video_save_path!="":
-                    #st.video(video_save_path)
+#                 capture.release()
+                if video_save_path!="":
+                    st.video(video_save_path)
                     #out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
