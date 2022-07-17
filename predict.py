@@ -137,7 +137,7 @@ if __name__ == "__main__":
                         st.title(ref)
                         break
                     frame_counter += 1
-                    if frame_counter == int(cap.get(cv2.CAP_PROP_FRAME_COUNT)):
+                    if frame_counter == int(capture.get(cv2.CAP_PROP_FRAME_COUNT)):
                         frame_counter = 0
                         # 格式转变，BGRtoRGB
                         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
