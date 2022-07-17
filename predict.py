@@ -129,8 +129,7 @@ if __name__ == "__main__":
                 fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
                 
                 
-                timecount=1
-                timeF = 20
+                frame_counter = 0
                 while (capture.isOpened()):
                     # 读取某一帧
                     ref, frame = capture.read()
