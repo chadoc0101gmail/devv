@@ -116,7 +116,7 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             yolo.reload_col_list()
             if video_path:
-                st.video(video_path)
+#                 st.video(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
