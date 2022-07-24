@@ -124,7 +124,7 @@ if __name__ == "__main__":
                 capture = cv2.VideoCapture(tfile.name)
                 #保存视频
                 
-                fourcc = int(cv2.VideoWriter_fourcc(*'x264'))  # 选择编码方式 streamlit不支持显示MPV4编码方式
+                fourcc = int(cv2.VideoWriter_fourcc(*'H264'))  # 选择编码方式 streamlit不支持显示MPV4编码方式
                 width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))  # 获取视频图像宽
                 height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 获取视频图像高
                 fps = capture.get(cv2.CAP_PROP_FPS)  # 读取图像显示帧率
