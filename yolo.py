@@ -348,9 +348,9 @@ class YOLO(object):
         df.iloc[0, 1] = top_conf[top_label_index[0]]
         list(enumerate(np.unique(top_label_num)))
         df.iloc[0,2] = top_label_num[0]
-#         df.iloc[0,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
-#         df.iloc[0,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
-#         df.iloc[0,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
+        df.iloc[0,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
+        df.iloc[0,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
+        df.iloc[0,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
 
         return image
