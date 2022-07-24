@@ -159,8 +159,8 @@ if __name__ == "__main__":
                 capture.release()
                 #播放视频
                 st.title("以下是识别后的视频")
-                st.video(outfile_name)
-#                 out.release()
+                st.video(outfile_name, format="video/mp4", start_time=0)
+                out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
 #                             print("Save processed video to the path :" + video_save_path)
