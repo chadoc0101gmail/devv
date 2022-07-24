@@ -116,6 +116,7 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             yolo.reload_col_list()
             if video_path:
+                st.title("以下是原始视频")
                 st.video(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
@@ -159,6 +160,7 @@ if __name__ == "__main__":
                 capture.release()
                 if video_save_path!="":
                     #播放视频
+                    st.title("以下是识别后视频")
                     st.video(video_save_path)
 #                     out.release()
                     #图片转化为视频
