@@ -129,6 +129,9 @@ if __name__ == "__main__":
                 height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 获取视频图像高
                 fps = capture.get(cv2.CAP_PROP_FPS)  # 读取图像显示帧率
                 out = cv2.VideoWriter(video_save_path, fourcc, fps, (width, height))  # 创建输出视频
+                
+                #创建空白快显示视频
+                result_place = st.empty()  # 创建空白块使得展示处理好的结果
 #                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")   
@@ -148,6 +151,7 @@ if __name__ == "__main__":
                         frame = Image.fromarray(np.uint8(frame))
                         # 进行检测
                         frame = np.array(yolo.detect_image(frame))
+                        result_place.image(frame, caption='Video')  # 结果图片 将图片帧展示在同一位置得到视频效果
                         # RGBtoBGR满足opencv显示格式
 #                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
 #                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
