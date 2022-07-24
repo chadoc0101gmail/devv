@@ -117,7 +117,7 @@ class YOLO(object):
         for i in range(len(lt)):
             flag = 0  # 记录每一个元素出现的次数
             for j in range(i + 1, len(lt)):  # 遍历i之后的元素下标
-                if lt[j] == lt[i]:
+                if lt[j].equals(lt[i]):
                     flag += 1  # 每当发现与自己相同的元素，flag+1
             if flag > max:  # 如果此时元素出现的次数大于最大值，记录此时元素的下标
                 max = flag
