@@ -111,18 +111,14 @@ class YOLO(object):
     #---------------------------------------------------#
     #   最多元素
     #---------------------------------------------------#
-    def showmax(lt):
-        index1 = 0  # 记录出现次数最多的元素下标
-        max = 0  # 记录最大的元素出现次数
-        for i in range(len(lt)):
-            flag = 0  # 记录每一个元素出现的次数
-            for j in range(i + 1, len(lt)):  # 遍历i之后的元素下标
-                if lt[j].equals(lt[i]):
-                    flag += 1  # 每当发现与自己相同的元素，flag+1
-            if flag > max:  # 如果此时元素出现的次数大于最大值，记录此时元素的下标
-                max = flag
-                index1 = i
-        return lt[index1]  # 返回出现最多的元素
+        def most_frequent(lst):
+        dict = {}
+        count, itm = 0, ''
+        for item in reversed(lst):
+            dict[item] = dict.get(item, 0) + 1
+            if dict[item] >= count:
+                count, itm = dict[item], item
+        return itm
     
     #---------------------------------------------------#
     #   检测图片
@@ -337,7 +333,8 @@ class YOLO(object):
 #             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
 #             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
 #             st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
-        Predicted_LableClass = showmax(collections_list)
+
+        Predicted_LableClass = most_frequent(collections_list)
         link_Baidu = 'https://baike.baidu.com/item/' + \
             ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
         df.iloc[1,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
