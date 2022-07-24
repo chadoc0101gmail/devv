@@ -318,6 +318,7 @@ class YOLO(object):
         collections_list = [] #定义统计列表
         for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
             Predicted_LableClass = self.class_names[int(c)]  #数字->标签
+            st.title(Predicted_LableClass)
             collections_list.append(Predicted_LableClass) #添加元素
             # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
             #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
