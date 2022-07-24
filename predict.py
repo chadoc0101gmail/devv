@@ -118,19 +118,21 @@ if __name__ == "__main__":
             if video_path:
                 st.title("以下是原始视频")
                 st.video(video_path)
+                video_path = io.BytesIO(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
-                if video_save_path!="":
-                    #保存视频
-                    fourcc  = cv2.VideoWriter_fourcc(*'XVID')
-                    size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-                    out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
-#                     st.video(video_save_path)
-                fps = 0.0           
+                #保存视频
+                outfile_name = 'output.mp4'  # 输出结果文件名
+                fourcc = int(cv2.VideoWriter_fourcc(*'avc1'))  # 选择编码方式 streamlit不支持显示MPV4编码方式
+                width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))  # 获取视频图像宽
+                height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 获取视频图像高
+                fps = capture.get(cv2.CAP_PROP_FPS)  # 读取图像显示帧率
+                out = cv2.VideoWriter(outfile_name, fourcc, fps, (width, height))  # 创建输出视频
+#                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")   
-                fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
+#                 fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
                 frame_counter = 0
                 while (capture.isOpened()):
                     # 读取某一帧
@@ -149,13 +151,9 @@ if __name__ == "__main__":
                         # RGBtoBGR满足opencv显示格式
 #                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
 #                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-
-                        if video_save_path!="":
-                            #保存视频
-                            out.write(frame)
-#                             st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
-                        else:
-                            break
+                        #保存视频
+                        out.write(frame)
+                    
                 yolo.show_df()
                 capture.release()
                 if video_save_path!="":
