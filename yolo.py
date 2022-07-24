@@ -22,7 +22,6 @@ def most_frequent(lst):
     dict = {}
     count, itm = 0, ''
     for item in reversed(lst):
-        st.title(item)
         dict[item] = dict.get(item, 0) + 1
         if dict[item] >= count:
             count, itm = dict[item], item
@@ -334,8 +333,9 @@ class YOLO(object):
 #             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
 #             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
 #             st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
-        st.title(collections_list)
+        
         Predicted_LableClass = most_frequent(collections_list)
+        st.title(Predicted_LableClass)
         link_Baidu = 'https://baike.baidu.com/item/' + \
             ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
         df.iloc[1,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
