@@ -313,9 +313,9 @@ class YOLO(object):
 #             index=np.linspace(1, len(np.unique(top_label)), len(np.unique(top_label)), dtype=int))  #列  
 
 
-          df = pd.DataFrame(data=np.zeros((1, 6)),
-              columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
-              index=np.linspace(1, 6, 6, dtype=int))  #列  
+        df = pd.DataFrame(data=np.zeros((1, 6)),
+            columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
+            index=np.linspace(1, 6, 6, dtype=int))  #列  
         top_label_class, top_label_num= np.unique(top_label,return_counts=True)
         top_label_class, top_label_index = np.unique(top_label,return_index=True)
         
