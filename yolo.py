@@ -15,6 +15,19 @@ from utils.utils_bbox import DecodeBox
 '''
 训练自己的数据集必看注释！
 '''
+#---------------------------------------------------#
+#   最多元素
+#---------------------------------------------------#
+def most_frequent(lst):
+    dict = {}
+    count, itm = 0, ''
+    for item in reversed(lst):
+        st.title(item)
+        dict[item] = dict.get(item, 0) + 1
+        if dict[item] >= count:
+            count, itm = dict[item], item
+    return itm
+      
 class YOLO(object):
     _defaults = {
         #--------------------------------------------------------------------------#
@@ -107,19 +120,6 @@ class YOLO(object):
         if self.cuda:
             self.net = nn.DataParallel(self.net)
             self.net = self.net.cuda()
-
-    #---------------------------------------------------#
-    #   最多元素
-    #---------------------------------------------------#
-    def most_frequent(lst):
-        dict = {}
-        count, itm = 0, ''
-        for item in reversed(lst):
-            st.title(item)
-            dict[item] = dict.get(item, 0) + 1
-            if dict[item] >= count:
-                count, itm = dict[item], item
-        return itm
     
     #---------------------------------------------------#
     #   检测图片
