@@ -18,6 +18,11 @@ from utils.utils_bbox import DecodeBox
 #---------------------------------------------------#
 #   最多元素
 #---------------------------------------------------#
+collections_list = [] #定义统计列表
+df = pd.DataFrame(data=np.zeros((1, 6)),
+    columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
+    index=np.linspace(1, 1, 1, dtype=int))  #列  
+
 def most_frequent(lst):
     dict = {}
     count, itm = 0, ''
@@ -312,17 +317,12 @@ class YOLO(object):
 #             columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
 #             index=np.linspace(1, len(np.unique(top_label)), len(np.unique(top_label)), dtype=int))  #列  
 
-
-        df = pd.DataFrame(data=np.zeros((1, 6)),
-            columns=['危害鸟种', '置信度','先验框个数','涉鸟故障类型','风险等级','防治措施'],  #行
-            index=np.linspace(1, 1, 1, dtype=int))  #列  
         top_label_class, top_label_num= np.unique(top_label,return_counts=True)
         top_label_class, top_label_index = np.unique(top_label,return_index=True)
         
-        collections_list = [] #定义统计列表
+        
         for i, c in list(enumerate(np.unique(top_label))):    #将矩阵添加索引（键值对）
             Predicted_LableClass = self.class_names[int(c)]  #数字->标签
-            st.title(Predicted_LableClass)
             collections_list.append(Predicted_LableClass) #添加元素
             # link_Wiki = 'https://en.wikipedia.org/wiki/' + \
             #     predicted_class.lower().replace(' ', '_')  # 故障鸟种超链接Wiki百科
@@ -340,7 +340,6 @@ class YOLO(object):
 #             st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
         
         Predicted_LableClass = most_frequent(collections_list)
-        st.title(Predicted_LableClass)
         link_Baidu = 'https://baike.baidu.com/item/' + \
             ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
         df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
@@ -351,10 +350,11 @@ class YOLO(object):
         df.iloc[0,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
         df.iloc[0,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
         df.iloc[0,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
-        st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
-
         return image
 
+    def show_df():
+        st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
+        
     def get_FPS(self, image, test_interval):
         image_shape = np.array(np.shape(image)[0:2])
         #---------------------------------------------------------#
