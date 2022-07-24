@@ -53,7 +53,7 @@ if __name__ == "__main__":
     #   保存视频时需要ctrl+c退出或者运行到最后一帧才会完成完整的保存步骤。
     #----------------------------------------------------------------------------------------------------------#
     video_path      = 0
-    video_save_path = 'rt_out.mp4'
+    video_save_path = 'rt_out.avi'
     video_fps       = 25.0
     #-------------------------------------------------------------------------#
     #   test_interval用于指定测量fps的时候，图片检测的次数
@@ -123,12 +123,12 @@ if __name__ == "__main__":
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
                 #保存视频
-                outfile_name = 'output.avi'  # 输出结果文件名
+                
                 fourcc = int(cv2.VideoWriter_fourcc(*'xvid'))  # 选择编码方式 streamlit不支持显示MPV4编码方式
                 width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))  # 获取视频图像宽
                 height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 获取视频图像高
                 fps = capture.get(cv2.CAP_PROP_FPS)  # 读取图像显示帧率
-                out = cv2.VideoWriter(outfile_name, fourcc, fps, (width, height))  # 创建输出视频
+                out = cv2.VideoWriter(video_save_path, fourcc, fps, (width, height))  # 创建输出视频
 #                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")   
@@ -158,7 +158,7 @@ if __name__ == "__main__":
                 capture.release()
                 #播放视频
                 st.title("以下是识别后的视频")
-                st.video(outfile_name)
+                st.video(video_save_path)
                 out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
