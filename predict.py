@@ -160,7 +160,7 @@ if __name__ == "__main__":
                 #播放视频
                 st.title("以下是识别后的视频")
                 st.video(outfile_name)
-                out.release()
+#                 out.release()
                     #图片转化为视频
 #                         if video_save_path!="":
 #                             print("Save processed video to the path :" + video_save_path)
