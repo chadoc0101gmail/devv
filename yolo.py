@@ -343,14 +343,14 @@ class YOLO(object):
         st.title(Predicted_LableClass)
         link_Baidu = 'https://baike.baidu.com/item/' + \
             ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
-#         df.iloc[1,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
+        df.iloc[0,0] = f'<a href="{link_Baidu}" target="_blank">{Chi_EngName[Predicted_LableClass]}</a>'   #标签->中文名
         # 显示识别故障鸟种置信度
-        df.iloc[1, 1] = top_conf[top_label_index[i]]
-        list(enumerate(np.unique(top_label_num)))
-        df.iloc[1,2] = top_label_num[i]
-        df.iloc[1,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
-        df.iloc[1,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
-        df.iloc[1,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
+#         df.iloc[0, 1] = top_conf[top_label_index[i]]
+#         list(enumerate(np.unique(top_label_num)))
+#         df.iloc[0,2] = top_label_num[i]
+#         df.iloc[0,3] = f'<a target="_blank">{ProblemTpye[Predicted_LableClass]}</a>'
+#         df.iloc[0,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
+#         df.iloc[0,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
 
         return image
