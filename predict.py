@@ -119,7 +119,7 @@ if __name__ == "__main__":
             if video_path:
                 st.title("以下是原始视频")
                 st.video(video_path)
-                video_path = io.BytesIO(video_path)
+#                 video_path = io.BytesIO(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
