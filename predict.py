@@ -91,6 +91,7 @@ if __name__ == "__main__":
                 st.title(':baby_chick:拍照识鸟\n你好 :sunglasses:') #网页上的文本
                 st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:balloon:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。') #加载图片
                 img = st.file_uploader('图片加载处') #加载图片
+                yolo.reload_col_list()
                 if img:
                     try:
                         image = Image.open(img)
@@ -113,6 +114,7 @@ if __name__ == "__main__":
 
         elif choose == "视频识别":  
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
+            yolo.reload_col_list()
             if video_path:
                 st.video(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
