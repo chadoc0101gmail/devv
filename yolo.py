@@ -353,6 +353,7 @@ class YOLO(object):
         return image
 
     def show_df():
+        st.write("tess")  
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
         
     def get_FPS(self, image, test_interval):
