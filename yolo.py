@@ -352,7 +352,7 @@ class YOLO(object):
         df.iloc[0,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
         return image
 
-    def show_df():
+    def show_df(self):
         st.write("tess")  
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
         
