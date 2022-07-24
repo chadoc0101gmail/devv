@@ -146,14 +146,14 @@ if __name__ == "__main__":
                         # RGBtoBGR满足opencv显示格式
 #                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
 #                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                        if ref:
-                            to_show = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                            if video_save_path!="":
-                                #保存视频
-                                out.write(to_show)
-                                st.image(to_show, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+
+                        if video_save_path!="":
+                            #保存视频
+                            out.write(frame)
+                            st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
+                yolo.show_df()
                 capture.release()
                 if video_save_path!="":
                     #播放视频
