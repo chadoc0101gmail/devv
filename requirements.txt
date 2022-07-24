@@ -9,3 +9,4 @@ opencv-python-headless
 #Pillow
 #h5py
 streamlit_option_menu
+io
