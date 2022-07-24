@@ -333,7 +333,7 @@ class YOLO(object):
 #             df.iloc[i,4] = f'<a target="_blank">{HarmRank[Predicted_LableClass]}</a>'
 #             df.iloc[i,5] = f'<a target="_blank">{Measure[Predicted_LableClass]}</a>'
 #             st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
-
+        st.title(collections_list)
         Predicted_LableClass = most_frequent(collections_list)
         link_Baidu = 'https://baike.baidu.com/item/' + \
             ChineseName[Predicted_LableClass].replace(' ', '_')  # 故障鸟种超链接百度百科
