@@ -12,6 +12,7 @@ import os
 from yolo import YOLO
 import cv2
 import tempfile
+import io
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
