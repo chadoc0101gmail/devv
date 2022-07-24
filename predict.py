@@ -124,7 +124,7 @@ if __name__ == "__main__":
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
                 #保存视频
-                outfile_name = 'output.mp4'  # 输出结果文件名
+                outfile_name = 'output.avi'  # 输出结果文件名
                 fourcc = int(cv2.VideoWriter_fourcc(*'avc1'))  # 选择编码方式 streamlit不支持显示MPV4编码方式
                 width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))  # 获取视频图像宽
                 height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 获取视频图像高
