@@ -111,7 +111,7 @@ class YOLO(object):
     #---------------------------------------------------#
     #   最多元素
     #---------------------------------------------------#
-        def most_frequent(lst):
+    def most_frequent(lst):
         dict = {}
         count, itm = 0, ''
         for item in reversed(lst):
