@@ -355,7 +355,9 @@ class YOLO(object):
     def show_df(self):
         st.write(collections_list)  
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
-        
+    def reload_col_list(self):
+        collections_list.clear
+        st.write(collections_list)  
     def get_FPS(self, image, test_interval):
         image_shape = np.array(np.shape(image)[0:2])
         #---------------------------------------------------------#
