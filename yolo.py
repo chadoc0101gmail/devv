@@ -353,7 +353,7 @@ class YOLO(object):
         return image
 
     def show_df(self):
-        st.write(collections_list)  
+#         st.write(collections_list)  
         st.write(df.to_html(escape=False), unsafe_allow_html=True) #显示表格
     def reload_col_list(self):
         collections_list.clear()
