@@ -116,7 +116,7 @@ if __name__ == "__main__":
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             yolo.reload_col_list()
             if video_path:
-#                 st.video(video_path)
+                st.video(video_path)
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
                 capture = cv2.VideoCapture(tfile.name)
@@ -125,7 +125,7 @@ if __name__ == "__main__":
                     fourcc  = cv2.VideoWriter_fourcc(*'XVID')
                     size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
                     out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
-                    st.video(video_save_path)
+#                     st.video(video_save_path)
                 fps = 0.0           
                 if (capture.isOpened() == False):
                         st.write("Error opening video stream or file")   
