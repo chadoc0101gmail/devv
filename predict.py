@@ -143,7 +143,7 @@ if __name__ == "__main__":
                     if not ref:
                         break
                     frame_counter += 1
-                    if frame_counter == 1:
+                    if frame_counter == 24:
                         frame_counter = 0
                         # 格式转变，BGRtoRGB
                         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
