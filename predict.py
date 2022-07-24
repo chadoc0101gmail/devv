@@ -53,7 +53,7 @@ if __name__ == "__main__":
     #   保存视频时需要ctrl+c退出或者运行到最后一帧才会完成完整的保存步骤。
     #----------------------------------------------------------------------------------------------------------#
     video_path      = 0
-    video_save_path = 'rt_out.avi'
+    video_save_path = 'rt_out.mp4'
     video_fps       = 25.0
     #-------------------------------------------------------------------------#
     #   test_interval用于指定测量fps的时候，图片检测的次数
@@ -152,7 +152,7 @@ if __name__ == "__main__":
                         if video_save_path!="":
                             #保存视频
                             out.write(frame)
-                            st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+#                             st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         else:
                             break
                 yolo.show_df()
