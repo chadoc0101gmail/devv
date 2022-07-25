@@ -187,7 +187,8 @@ if __name__ == "__main__":
 #                 st.title("视频")
         elif choose == "防鸟装置介绍":
             st.title(':baby_chick:防鸟装置介绍\n') 
-            st.info('你好 :sunglasses:请在这里选择您想要了解的防鸟装置') 
+            st.info('你好 :sunglasses:')
+            st.info('请在这里选择您想要了解的防鸟装置')            
             Options = ["防鸟刺","防鸟挡板","防鸟盒","防鸟针板","防鸟罩","防鸟护套","防鸟拉线","人造鸟巢","人造栖鸟架","惊鸟装置","驱鸟装置"]
             choose = st.selectbox("", Options)
             st.spinner(text='资源加载中...')
