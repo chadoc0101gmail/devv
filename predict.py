@@ -12,6 +12,10 @@ import os
 from yolo import YOLO
 import cv2
 import tempfile
+from ..functions.table import mask_equal
+from ..functions.col import pdb_code_col
+from ..functions.path import pages_str, data_str, get_file_path
+from ..functions.gui import load_st_table, write_st_end, create_st_button, show_st_structure, get_neighbor_path
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
@@ -185,12 +189,10 @@ if __name__ == "__main__":
 #             elif selecte1 == "视频":
 #                 # st.video("./视频/地震.mp4")
 #                 st.title("视频")
-        elif choose == "防鸟装置介绍":
-            st.title(':baby_chick:防鸟装置介绍\n') 
-            st.info('你好 :sunglasses:')
-            st.info('请在这里选择您想要了解的防鸟装置')            
+ elif choose == "防鸟装置介绍":
+            st.title(':baby_chick:防鸟装置\n你好 :sunglasses:') 
             Options = ["防鸟刺","防鸟挡板","防鸟盒","防鸟针板","防鸟罩","防鸟护套","防鸟拉线","人造鸟巢","人造栖鸟架","惊鸟装置","驱鸟装置"]
-            choose = st.selectbox("", Options)
+            choose = st.selectbox("在这里选择您想要了解的防鸟装置", Options)
             st.spinner(text='资源加载中...')
             if choose == "防鸟刺":
                 st.info('防鸟刺是由多根长刺组成的制品，各长刺在底部集中固定，另一端向上均匀散开，安装于线路绝缘子串上方，以防止大型鸟类在绝缘子串上方栖息和泄粪，如图所示。防鸟刺包括防鸟刺本体和连接金具。防鸟刺分为防鸟直刺(FNCZ)、防鸟弹簧刺(FNCT)和防鸟异型刺(FNCY)三类，如图所示。连接金具按照连接形式可分为 U 型和 L 型，按照功能可分为倾倒型(Q)和非倾125倒型(FQ)，如图所示。') 
