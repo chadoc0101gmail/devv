@@ -12,10 +12,6 @@ import os
 from yolo import YOLO
 import cv2
 import tempfile
-from ..util.table import mask_equal
-from ..util.col import pdb_code_col
-from ..util.path import pages_str, data_str, get_file_path
-from ..util.gui import load_st_table, write_st_end, create_st_button, show_st_structure, get_neighbor_path
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
