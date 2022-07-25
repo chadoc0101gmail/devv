@@ -15,7 +15,7 @@ import tempfile
 from ..functions.table import mask_equal
 from ..functions.col import pdb_code_col
 from ..functions.path import pages_str, data_str, get_file_path
-from ..functions.gui import load_st_table, write_st_end, create_st_button, show_st_structure, 
+from ..functions.gui import load_st_table, write_st_end, create_st_button, show_st_structure, get_neighbor_path
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
