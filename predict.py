@@ -10,6 +10,7 @@ import numpy as np
 from PIL import Image
 import os
 from yolo import YOLO
+import io
 import cv2
 import tempfile
 COMMENT_TEMPLATE_MD = """{} - {}
@@ -113,63 +114,70 @@ if __name__ == "__main__":
        
 
         elif choose == "视频识别":  
+            mode = "video"
+            st.title(':bird:拍照识鸟\n你好 :sunglasses:') #网页上的文本
+            st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:baby_chick:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。') #加载图片
+            #################### 进度条 #####################
+            frame_frequency = st.slider('请选择您需要的检测频度（注：多次选择将重新开始检测）：', 0, 24, 1)
+            st.write("每 ", frame_frequency, '帧检测一次，大概需要等待', int(250/frame_frequency), '秒')  
+            
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
             yolo.reload_col_list()
+            
+            
             if video_path:
-                st.title("以下是原始视频")
-                st.video(video_path)
-#                 video_path = io.BytesIO(video_path)
+                st.video(video_path) #播放加载的原始视频
+                #################### 转格式 #####################
                 tfile = tempfile.NamedTemporaryFile(delete=False)
                 tfile.write(video_path.read())
-                capture = cv2.VideoCapture(tfile.name)
-                #保存视频
+                capture = cv2.VideoCapture(tfile.name) #读取摄像头，视频抽帧,视频图像化,参数是视频文件路径（摄像头索引）
                 
-                fourcc = int(cv2.VideoWriter_fourcc(*'H264'))  # 选择编码方式 streamlit不支持显示MPV4编码方式
-                width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))  # 获取视频图像宽
-                height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 获取视频图像高
-                fps = capture.get(cv2.CAP_PROP_FPS)  # 读取图像显示帧率
-                out = cv2.VideoWriter(video_save_path, fourcc, fps, (width, height))  # 创建输出视频
-                
-                #创建空白快显示视频
-                result_place = st.empty()  # 创建空白块使得展示处理好的结果
-#                 fps = 0.0           
+                if video_save_path!="":#video_save_path表示视频保存的路径，当video_save_path=""时表示不保存
+                    #保存视频
+                    fourcc  = int(cv2.VideoWriter_fourcc(*'avc1')) #编码格式，*'XVID' 单帧耗时(s)0.3785 文件小
+                    size    = (int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+                    out     = cv2.VideoWriter(video_save_path, fourcc, video_fps, size)
+                    # st.video(video_save_path)
+                fps = 0.0     
+
+                ########### Streamlit：Error Message ###########
                 if (capture.isOpened() == False):
-                        st.write("Error opening video stream or file")   
-#                 fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
+                        st.write("Error opening video stream or file")        
+                fps = int(round(capture.get(cv2.CAP_PROP_FPS)))
                 frame_counter = 0
-                while (capture.isOpened()):
+                
+                while (capture.isOpened()): 
+                    t1 = time.time() #用time来计算一下程序执行的时间
                     # 读取某一帧
-                    ref, frame = capture.read()
-                    if not ref:
+                    ref, frame = capture.read()#读取视频返回视频是否结束的bool值和每一帧的图像，该函数时按帧读取的，如果读取成功ret则会为1，当读到文件末尾则会变为0
+                    if not ref:# 读到最后一帧，ref=0，break跳出
                         break
                     frame_counter += 1
-                    if frame_counter == 24:
-                        frame_counter = 0
+                    if frame_counter == frame_frequency: # 表示每frame_frequency帧检测一次，后期可将其调整为用户可调节参数（可推拉进度条等）
+                        frame_counter = 0 
                         # 格式转变，BGRtoRGB
-                        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+                        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)#frame就是每一帧的图像数据
                         # 转变成Image
                         frame = Image.fromarray(np.uint8(frame))
                         # 进行检测
                         frame = np.array(yolo.detect_image(frame))
-#                         time.sleep(1)
-                        result_place.image(frame, caption='Video')  # 结果图片 将图片帧展示在同一位置得到视频效果
                         # RGBtoBGR满足opencv显示格式
-#                         frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
-#                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                        #保存视频
-                        out.write(frame)
-                    
+                        frame = cv2.cvtColor(frame,cv2.COLOR_RGB2BGR)
+
+                        fps  = ( fps + (1./(time.time()-t1)) ) / 2
+                        print("fps= %.2f"%(fps))
+                        frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                        # st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
+                        if video_save_path!="":
+                            #保存视频
+                            out.write(frame)
+                        frame = io.BytesIO(frame)  # Streamlit转格式显示重要步骤！！！（往内存中写入estimate数据）
                 yolo.show_df()
-                capture.release()
-                #播放视频
-                st.title("以下是识别后的视频")
-                st.video(video_save_path)
-                out.release()
-                    #图片转化为视频
-#                         if video_save_path!="":
-#                             print("Save processed video to the path :" + video_save_path)
-#                             out.release()
-#                         cv2.destroyAllWindows()
+                capture.release() #释放硬件资源
+                if video_save_path!="":
+                    #播放视频
+                    out.release()
+                    st.video(video_save_path) #播放处理好了的视频
             else:
                 st.title(":exclamation:您还未选择视频文件")
 
