@@ -176,10 +176,10 @@ if __name__ == "__main__":
                 capture.release() #释放硬件资源
                 if video_save_path!="":
                     #播放视频
-                    video_file = open(video_save_path, 'rb')
-                    video_bytes = video_file.read()
+                    #video_file = open(video_save_path, 'rb')
+                    #video_bytes = video_file.read()
                     out.release()
-                    st.video(video_bytes) #播放处理好了的视频
+                    #st.video(video_bytes) #播放处理好了的视频
             else:
                 st.title(":exclamation:您还未选择视频文件")
 
