@@ -12,10 +12,6 @@ import os
 from yolo import YOLO
 import cv2
 import tempfile
-from ..utils.table import mask_equal
-from ..utils.col import pdb_code_col
-from ..utils.path import pages_str, data_str, get_file_path
-from ..utils.gui import load_st_table, write_st_end, create_st_button, show_st_structure, get_neighbor_path
 COMMENT_TEMPLATE_MD = """{} - {}
 > {}"""
 
@@ -190,7 +186,7 @@ if __name__ == "__main__":
 #                 # st.video("./视频/地震.mp4")
 #                 st.title("视频")
         elif choose == "防鸟装置介绍":
-            st.title(':baby_chick:防鸟装置\n你好 :sunglasses:') 
+            st.title(':baby_chick:防鸟装置介绍\n你好 :sunglasses:') 
             Options = ["防鸟刺","防鸟挡板","防鸟盒","防鸟针板","防鸟罩","防鸟护套","防鸟拉线","人造鸟巢","人造栖鸟架","惊鸟装置","驱鸟装置"]
             choose = st.selectbox("在这里选择您想要了解的防鸟装置", Options)
             st.spinner(text='资源加载中...')
