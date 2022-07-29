@@ -175,8 +175,8 @@ if __name__ == "__main__":
                 yolo.show_df()
                 capture.release() #释放硬件资源
                 if video_save_path!="":
-#                     video_file = open(video_save_path, 'rb')
-#                     video_bytes = video_file.read()
+                    video_file = open(video_save_path, 'rb')
+                    video_bytes = video_file.read()
                     out.release()
                     st.video(video_save_path) #播放处理好了的视频
             else:
