@@ -54,7 +54,7 @@ if __name__ == "__main__":
     #   保存视频时需要ctrl+c退出或者运行到最后一帧才会完成完整的保存步骤。
     #----------------------------------------------------------------------------------------------------------#
     video_path      = 0
-    video_save_path = 'prosses.avi'
+    video_save_path = "prosses.mp4"
     video_fps       = 25.0
     #-------------------------------------------------------------------------#
     #   test_interval用于指定测量fps的时候，图片检测的次数
@@ -177,7 +177,7 @@ if __name__ == "__main__":
                 if video_save_path!="":
                     #播放视频
                     out.release()
-                    st.video(video_save_path) #播放处理好了的视频
+                    st.video("prosses.mp4") #播放处理好了的视频
             else:
                 st.title(":exclamation:您还未选择视频文件")
 
