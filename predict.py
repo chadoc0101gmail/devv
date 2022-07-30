@@ -168,7 +168,7 @@ if __name__ == "__main__":
 #                         print("fps= %.2f"%(fps))
                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         # st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
-                        if video_save_path!="":
+#                         if video_save_path!="":
                             #保存视频
 #                             out.write(frame)
 #                         frame = io.BytesIO(frame)  # Streamlit转格式显示重要步骤！！！（往内存中写入estimate数据）
