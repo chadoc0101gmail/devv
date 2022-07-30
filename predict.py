@@ -54,7 +54,7 @@ if __name__ == "__main__":
     #   保存视频时需要ctrl+c退出或者运行到最后一帧才会完成完整的保存步骤。
     #----------------------------------------------------------------------------------------------------------#
     video_path      = 0
-    video_save_path = "prosses.mp4"
+    video_save_path = "//prosses.mp4"
     video_fps       = 25.0
     #-------------------------------------------------------------------------#
     #   test_interval用于指定测量fps的时候，图片检测的次数
@@ -118,7 +118,7 @@ if __name__ == "__main__":
             st.title(':bird:拍照识鸟\n你好 :sunglasses:') #网页上的文本
             st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:baby_chick:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。') #加载图片
             #################### 进度条 #####################
-            frame_frequency = st.slider('请选择您需要的检测频度（注：多次选择将重新开始检测）：', 0, 22, 1)
+            frame_frequency = st.slider('请选择您需要的检测频度（注：多次选择将重新开始检测）：', 0, 24, 1)
             st.write("每 ", frame_frequency, '帧检测一次，大概需要等待', int(250/frame_frequency), '秒')  
             
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
@@ -166,7 +166,7 @@ if __name__ == "__main__":
 
                         fps  = ( fps + (1./(time.time()-t1)) ) / 2
                         print("fps= %.2f"%(fps))
-#                         frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                        frame = cv2.putText(frame, "fps= %.2f"%(fps), (0, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         # st.image(frame, caption='Video')  # 将图片帧展示在同一位置得到视频效果
                         if video_save_path!="":
                             #保存视频
