@@ -171,7 +171,7 @@ if __name__ == "__main__":
                         if video_save_path!="":
                             #保存视频
 #                             out.write(frame)
-                        frame = io.BytesIO(frame)  # Streamlit转格式显示重要步骤！！！（往内存中写入estimate数据）
+#                         frame = io.BytesIO(frame)  # Streamlit转格式显示重要步骤！！！（往内存中写入estimate数据）
                 yolo.show_df()
                 capture.release() #释放硬件资源
                 if video_save_path!="":
