@@ -118,7 +118,7 @@ if __name__ == "__main__":
             st.title(':bird:拍照识鸟\n你好 :sunglasses:') #网页上的文本
             st.info('为了处理突发性输电线路渉鸟故障，针对性地加装防鸟措施，:baby_chick:甄羽可为您识别涉鸟故障危害鸟种，以便为运维人员提供正确识鸟的工具。') #加载图片
             #################### 进度条 #####################
-            frame_frequency = st.slider('请选择您需要的检测频度（注：多次选择将重新开始检测）：', 1, 24, 1)
+            frame_frequency = st.slider('请选择您需要的检测频度（注：多次选择将重新开始检测）：', 1, 22, 1)
             st.write("每 ", frame_frequency, '帧检测一次，大概需要等待', int(250/frame_frequency), '秒')  
             
             video_path = st.file_uploader('视频加载处', type=['mp4'])  # 上传本地视频
